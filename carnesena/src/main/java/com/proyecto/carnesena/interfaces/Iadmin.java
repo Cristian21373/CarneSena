@@ -4,11 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.proyecto.carnesena.model.admin;
+import com.proyecto.carnesena.model.Admin;
 
 
-public interface Iadmin extends JpaRepository<admin, Integer>{
+public interface Iadmin extends JpaRepository<Admin, Integer>{
 
-    Optional<admin> findByUsername(String username);
+    Optional<Admin> findByUsername(String username);
 
 }

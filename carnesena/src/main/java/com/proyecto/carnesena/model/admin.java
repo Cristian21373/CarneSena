@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "admin")
-public class admin implements UserDetails{
+@Entity(name = "Admin")
+public class Admin implements UserDetails{
     // @Id
     // @GeneratedValue(strategy = GenerationType.UUID)
     // @Column(name = "idUser", nullable = false, length = 36)
@@ -60,7 +60,7 @@ public class admin implements UserDetails{
     String username;
     @Column(nullable = false)
     String lastname;
-    String firstname;
+
     String password;
     @Enumerated(EnumType.STRING) 
     role role;

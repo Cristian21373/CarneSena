@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class loginRequest {
+public class LoginRequest {
     String username;
     String password;
 }
