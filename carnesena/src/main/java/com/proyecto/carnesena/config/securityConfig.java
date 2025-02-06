@@ -14,7 +14,7 @@ import com.proyecto.carnesena.Jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@EnableWebSecurity  
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class securityConfig {
 
@@ -22,25 +22,20 @@ public class securityConfig {
     private final AuthenticationProvider authProvider;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
-     {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-        .csrf(csrf -> 
-        csrf
-        .disable())
+                .csrf(csrf -> 
+                    csrf
+                        .disable())
 
-        .authorizeHttpRequests(authRequest -> 
-        authRequest
-        .requestMatchers("/auth/**").permitAll()
-        .anyRequest().authenticated()
-            )
-            .sessionManagement(sessionManager -> 
-                sessionManager
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authRequest -> authRequest
+                        .requestMatchers("/auth/**").permitAll()
+                        .anyRequest().authenticated())
+                .sessionManagement(sessionManager -> sessionManager
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .build();
+                .build();
     }
-
 
 }
