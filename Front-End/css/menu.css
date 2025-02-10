@@ -10,12 +10,12 @@
 body {
     font-family: "Work Sans", serif;
     background: #F1F1F1;
-    padding-top: 70px; /* Ajusta este valor según la altura del menú */
+    padding-top: 70px;
 }
 
 
 .navbar {
-    position: fixed; /* Hace que el menú se mantenga en la parte superior */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -25,8 +25,7 @@ body {
     padding: 10px 20px;
     background-color: #ffffff;
     color: #000000;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra para que resalte */
-    z-index: 1000; /* Se asegura de que el menú esté sobre todo el contenido */
+    z-index: 1000;
 }
 
 
@@ -38,7 +37,7 @@ body {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 70px; /* Aquí aumentamos el valor */
+    gap: 70px;
 }
 
 .nav-links li a {
@@ -47,12 +46,12 @@ body {
     text-decoration: none;
     font-weight: 500;
     font-size: 18px;
-    padding-bottom: 5px; /* Espacio entre el texto y la línea */
+    padding-bottom: 5px;
 }
 
 .nav-links li a:hover,
 .nav-links li a.active { 
-    border-bottom: 3px solid #65C472; /* Línea verde */
+    border-bottom: 3px solid #65C472; 
 }
 
 .menu-btn {
@@ -67,6 +66,7 @@ body {
 
 .menu-btn:hover {
     background-color: #3e7946;
+    transition: background 0.3s ease-in-out;
 }
 
 .navbar .logo img {
@@ -79,15 +79,15 @@ body {
 .navbar .logo {
     display: flex;
     align-items: center;
-    padding-right: 20px; /* Espacio entre la línea y el logo */
-    border-right: 2px solid #000; /* Línea vertical */
-    height: 50px; /* Ajustar la altura de la línea al logo */
+    padding-right: 20px; 
+    border-right: 2px solid #000;
+    height: 50px;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espacio entre los elementos */
+    gap: 15px; 
 }
 
 .logo-container img {
@@ -99,8 +99,8 @@ body {
 
 .separator {
     width: 2px;
-    height: 50px; /* Ajusta la altura según el tamaño del logo */
-    background-color: #000; /* Color de la línea */
+    height: 50px; 
+    background-color: #000; 
 }
 
 .logo-text {
@@ -138,20 +138,26 @@ body {
     .navbar .logo img {
         width: 60px; 
     }
+
+    .welcome-text p {
+        max-width: 100%; 
+        padding-right: 0; 
+        text-align: center; 
+    }
 }
 
 @media (max-width: 980px) {
     .navbar {
-        flex-wrap: wrap; /* Permite que los elementos se ajusten si es necesario */
-        padding: 10px; /* Reduce el padding para que no se desajuste */
+        flex-wrap: wrap;
+        padding: 10px; 
     }
 
     .nav-links {
-        gap: 30px; /* Reduce el espacio entre los enlaces */
+        gap: 30px;
     }
 
     .nav-links li a {
-        font-size: 16px; /* Reduce el tamaño del texto */
+        font-size: 16px; 
     }
 
     .menu-btn {
@@ -164,7 +170,7 @@ body {
     }
 
     .separator {
-        height: 40px; /* Ajusta la altura de la línea */
+        height: 40px; 
     }
 
     .logo-text {
@@ -174,61 +180,149 @@ body {
 
 
 
-/*Mensaje de bienvenida*/
+/*Mensaje de bienvenida e imagen de referencia*/
 
 .welcome-section {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 40px; /* Espacio entre el texto y la imagen */
-    max-width: 1000px;
-    margin: 50px auto;
+    justify-content: space-between; 
+    width: 100%; 
+    max-width: 100%;
+    padding: 50px;
+    gap: 50px;
 }
 
 .welcome-container {
-    flex: 1; /* Permite que ocupe el espacio disponible */
-    padding: 20px;
+    flex: 1.5;
     background: white;
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Alinea el texto a la izquierda */
+    text-align: left;
+    padding: 63px;
+    min-height: 702px;
+    max-width: 66%;
 }
 
 .welcome-text h1 {
-    font-size: 28px;
+    font-size: clamp(40px, 10vw, 130px); 
     color: #333;
+    font-weight: bold;
 }
 
 .welcome-text p {
-    font-size: 18px;
+    font-size: 26px; 
     color: #555;
 }
 
 .welcome-image {
-    flex: 1;
+    flex: 0.5;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%; 
 }
 
 .welcome-image img {
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 500px; 
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Ajuste para pantallas pequeñas */
-@media (max-width: 768px) {
+/* Responsivo para pantallas más pequeñas */
+@media (max-width: 770px) {
     .welcome-section {
         flex-direction: column;
         text-align: center;
+        padding: 20px;
     }
 
     .welcome-container {
         text-align: center;
+        max-width: 100%;
+        padding: 40px;
+        min-height: auto;
     }
 
     .welcome-image img {
-        width: 60%;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .welcome-text h1 {
+        font-size: clamp(30px, 6vw, 60px);
+    }
+}
+
+
+@media (max-width: 1300px) {
+    .welcome-text h1 {
+        font-size: clamp(40px, 10vw, 100px);
+    }
+}
+
+@media (max-width: 1120px) {
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .welcome-container {
+        max-width: 90%;
+        padding: 40px;
+    }
+
+    .welcome-text h1 {
+        font-size: clamp(35px, 8vw, 80px);
+    }
+}
+
+
+/*Botones debajo del mensaje*/
+.welcome-buttons {
+    margin-top: 90px;
+    display: flex;
+    gap: 20px;
+}
+
+.welcome-buttons button {
+    padding: 20px 68px;
+    font-family: "Work Sans", serif;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-green {
+    background-color: #65C472;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #3e7946;
+}
+
+.btn-gray {
+    background-color: #cccccc;
+    color: #333;
+}
+
+.btn-gray:hover {
+    background-color: #a0a0a0;
+}
+
+
+/* Ajuste responsive: los botones se apilan en pantallas pequeñas */
+@media (max-width: 768px) {
+    .welcome-buttons {
+        flex-direction: column; /* Coloca los botones uno debajo del otro */
+        align-items: center; /* Centra los botones */
+    }
+
+    .welcome-buttons button {
+        width: 100%; /* Hace que los botones ocupen todo el ancho disponible */
+        max-width: 350px; /* Establece un ancho máximo */
     }
 }
