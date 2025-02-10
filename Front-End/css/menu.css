@@ -1,0 +1,234 @@
+/*Menu*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: "Work Sans", serif;
+    background: #F1F1F1;
+    padding-top: 70px; /* Ajusta este valor según la altura del menú */
+}
+
+
+.navbar {
+    position: fixed; /* Hace que el menú se mantenga en la parte superior */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra para que resalte */
+    z-index: 1000; /* Se asegura de que el menú esté sobre todo el contenido */
+}
+
+
+.navbar .logo img {
+    width: 50px;
+    height: auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 70px; /* Aquí aumentamos el valor */
+}
+
+.nav-links li a {
+    position: relative;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    padding-bottom: 5px; /* Espacio entre el texto y la línea */
+}
+
+.nav-links li a:hover,
+.nav-links li a.active { 
+    border-bottom: 3px solid #65C472; /* Línea verde */
+}
+
+.menu-btn {
+    background-color: #65C472;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: large;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.menu-btn:hover {
+    background-color: #3e7946;
+}
+
+.navbar .logo img {
+    width: 60px;
+    height: auto;
+    max-width: 100%;
+    transition: all 0.3s ease-in-out; 
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    padding-right: 20px; /* Espacio entre la línea y el logo */
+    border-right: 2px solid #000; /* Línea vertical */
+    height: 50px; /* Ajustar la altura de la línea al logo */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre los elementos */
+}
+
+.logo-container img {
+    width: 60px;
+    height: auto;
+    max-width: 100%;
+    transition: all 0.3s ease-in-out; 
+}
+
+.separator {
+    width: 2px;
+    height: 50px; /* Ajusta la altura según el tamaño del logo */
+    background-color: #000; /* Color de la línea */
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+}
+
+
+@media (max-width: 480px) {
+    .navbar .logo img {
+        width: 50px; 
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        width: 100%;
+        justify-content: center;
+        position: absolute;
+        top: 60px;
+        background-color: #333;
+        left: 0;
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar .logo img {
+        width: 60px; 
+    }
+}
+
+@media (max-width: 980px) {
+    .navbar {
+        flex-wrap: wrap; /* Permite que los elementos se ajusten si es necesario */
+        padding: 10px; /* Reduce el padding para que no se desajuste */
+    }
+
+    .nav-links {
+        gap: 30px; /* Reduce el espacio entre los enlaces */
+    }
+
+    .nav-links li a {
+        font-size: 16px; /* Reduce el tamaño del texto */
+    }
+
+    .menu-btn {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .logo-container {
+        gap: 10px;
+    }
+
+    .separator {
+        height: 40px; /* Ajusta la altura de la línea */
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+}
+
+
+
+/*Mensaje de bienvenida*/
+
+.welcome-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px; /* Espacio entre el texto y la imagen */
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.welcome-container {
+    flex: 1; /* Permite que ocupe el espacio disponible */
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.welcome-text h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.welcome-text p {
+    font-size: 18px;
+    color: #555;
+}
+
+.welcome-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.welcome-image img {
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .welcome-container {
+        text-align: center;
+    }
+
+    .welcome-image img {
+        width: 60%;
+    }
+}
