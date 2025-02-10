@@ -314,15 +314,17 @@ body {
 }
 
 
-/* Ajuste responsive: los botones se apilan en pantallas pequeñas */
+/*los botones se apilan en pantallas pequeñas */
 @media (max-width: 768px) {
     .welcome-buttons {
-        flex-direction: column; /* Coloca los botones uno debajo del otro */
-        align-items: center; /* Centra los botones */
+        flex-direction: column; 
+        align-items: center; 
     }
 
     .welcome-buttons button {
-        width: 100%; /* Hace que los botones ocupen todo el ancho disponible */
-        max-width: 350px; /* Establece un ancho máximo */
+        width: 100%; 
+        max-width: 350px; 
     }
 }
+
+
