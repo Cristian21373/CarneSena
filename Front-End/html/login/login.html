@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/Front-End/css/login.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Inicio de sesion</title>
@@ -27,43 +28,64 @@
             <li><a href="#">¿Como descargar tu carnet?</a></li>
         </ul>
 
-         <!-- Opciones del menu lateral-->
-         <a href="/Front-End/index.html"><button class="menu-btn" id="menu-btn">Volver</button></a>
-         <div class="hamburger" id="hamburger">&#9776;</div>
- 
-         <div class="mobile-menu" id="mobile-menu">
-             <span class="close-btn" id="close-btn">&times;</span>
-             <ul>
-                 <li><a href="/Front-End/index.html">Inicio</a></li>
-                 <li><a href="#">Verificar NIS</a></li>
-                 <li><a href="#">¿Cómo descargar tu carnet?</a></li>
-                 <li><a href="/Front-End/index.html">Volver</a></li>
-             </ul>
-         </div>
+        <!-- Opciones del menu lateral-->
+        <a href="/Front-End/index.html"><button class="menu-btn" id="menu-btn">Volver</button></a>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <ul>
+                <li><a href="/Front-End/index.html">Inicio</a></li>
+                <li><a href="#">Verificar NIS</a></li>
+                <li><a href="#">¿Cómo descargar tu carnet?</a></li>
+                <li><a href="/Front-End/index.html">Volver</a></li>
+            </ul>
+        </div>
     </nav>
+
+    <div class="login-container">
+        <h2>Inicio de sesión</h2>
+        <form>
+            <div class="input-container">
+                <label for="username">Correo Electrónico</label>
+                <input type="text" id="username" name="username" required placeholder="Ingrese su correo electrónico">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+        
+            <div class="input-container">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required placeholder="Ingrese su contraseña">
+                <i class="fa-solid fa-key"></i>
+            </div>
+            <a href="#">¿Haz olvidado tu contraseña?</a>
+
+            <button type="submit" class="login-btn">Ingresar</button>
+        </form>
+    </div>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.getElementById("hamburger");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const closeBtn = document.getElementById("close-btn");
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = document.getElementById("close-btn");
 
-    // Mostrar menú al hacer clic en el ícono hamburguesa
-    hamburger.addEventListener("click", function () {
-        mobileMenu.style.right = "0";
-    });
+        // Mostrar menú al hacer clic en el ícono hamburguesa
+        hamburger.addEventListener("click", function () {
+            mobileMenu.style.right = "0";
+        });
 
-    // Cerrar menú al hacer clic en el botón de cerrar
-    closeBtn.addEventListener("click", function () {
-        mobileMenu.style.right = "-100%";
-    });
-
-    // Cerrar menú si se hace clic fuera de él
-    document.addEventListener("click", function (event) {
-        if (!mobileMenu.contains(event.target) && !hamburger.contains(event.target)) {
+        // Cerrar menú al hacer clic en el botón de cerrar
+        closeBtn.addEventListener("click", function () {
             mobileMenu.style.right = "-100%";
-        }
+        });
+
+        // Cerrar menú si se hace clic fuera de él
+        document.addEventListener("click", function (event) {
+            if (!mobileMenu.contains(event.target) && !hamburger.contains(event.target)) {
+                mobileMenu.style.right = "-100%";
+            }
+        });
     });
-});
 </script>
+
 </html>
