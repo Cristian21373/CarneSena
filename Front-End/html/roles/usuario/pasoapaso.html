@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/Front-End/css/index.css">
+    <link rel="stylesheet" href="/Front-End/css/pasoapaso.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
-    <title>Paso a paso</title>
+    <title>Paso a Paso</title>
 </head>
 
 <body>
@@ -27,8 +27,7 @@
             <li><a href="/Front-End/html/roles/usuario/pasoapaso.html">¿Cómo descargar tu carnet?</a></li>
         </ul>
 
-        <!-- Opciones del menu lateral-->
-        <a href="/Front-End/html/login/login.html"><button class="menu-btn" id="menu-btn">Iniciar sesion</button></a>
+        <a href="/Front-End/html/login/login.html"><button class="menu-btn" id="menu-btn">Iniciar sesión</button></a>
         <div class="hamburger" id="hamburger">&#9776;</div>
 
         <div class="mobile-menu" id="mobile-menu">
@@ -42,23 +41,78 @@
         </div>
     </nav>
 
+    <!-- Contenedor de los pasos -->
+    <div class="steps-container">
+        <h1 class="steps-title">Cómo descargar tu carné</h1>
 
-    <div class="welcome-section">
-        <div class="welcome-container">
-            <div class="welcome-text">
-                <h1>Bienvenido a CarneSENA</h1>
-                <p>¡Facilitamos tu acceso al carné de aprendiz! Este sistema está diseñado para optimizar el proceso de
-                    generación y descarga de carnés. Ahora, de forma rápida y segura, puedes verificar tu registro y
-                    acceder a tu carné con solo unos clics.</p>
+        <!-- Paso 1 -->
+        <div class="step">
+            <div class="step-image">
+                <img src="/Front-End/img/paso1.png" alt="Paso 1">
             </div>
+            <div class="step-text">
+                <h2>Accede al Sistema</h2>
+                <p>· Ingresa al sitio web del Sistema de Gestión de Carnés del SENA utilizando un navegador compatible
+                    como Chrome, Firefox o Edge.</p>
+            </div>
+        </div>
 
-           
+        <!-- Paso 2 -->
+        <div class="step reverse">
+            <div class="step-text">
+                <h2>Ingresa tu Número de Identificación SENA (NIS)</h2>
+                <p>· En la página principal, localiza el campo donde se te pide verificar tu NIS</p>
+                <br>
+                <p>· Escribe tu número de identificación y haz clic en el botón "Verificar".</p>
+            </div>
+            <div class="step-image">
+                <img src="/Front-End/img/paso2.png" alt="Paso 2">
+            </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="step">
+            <div class="step-image">
+                <img src="/Front-End/img/paso3.png" alt="Paso 3">
+            </div>
+            <div class="step-text">
+                <h2>Confirma tu Registro</h2>
+                <p>· Si tu NIS está registrado en el sistema, aparecerá un mensaje indicando que puedes descargar tu
+                    carné.</p>
+                <br>
+                <p>· <strong>Si no está registrado</strong>, se mostrará un mensaje de error. En ese caso, contacta al
+                    administrador.</p>
+
+            </div>
+        </div>
+
+        <!-- paso 4 -->
+        <div class="step">
+            <div class="step-image">
+                <img src="/Front-End/img/paso3.png" alt="Paso 3">
+            </div>
+            <div class="step-text">
+                <h2>Previsualiza tu Carné</h2>
+                <p>· Antes de descargarlo, el sistema mostrará una previsualización de tu carné. Verifica que toda la
+                    información sea correcta.</p>
+            </div>
+        </div>
+
+        <!-- paso 5 -->
+        <div class="step">
+            <div class="step-image">
+                <img src="/Front-End/img/paso3.png" alt="Paso 3">
+            </div>
+            <div class="step-text">
+                <h2>Descarga tu Carné</h2>
+                <p>· Haz clic en el botón "Crear Carnét".</p>
+                <br>
+                <p>· El carné se descargará en formato PDF. Busca el archivo en la carpeta de descargas de tu dispositivo.</p>
+            </div>
+        </div>
     </div>
 
-
-
-
-
+    <script src="/Front-End/js/menuMovil.js"></script>
 </body>
-<script src="/Front-End/js/menuMovil.js"></script>
+
 </html>
