@@ -24,7 +24,7 @@
         <ul class="nav-links">
             <li><a href="/Front-End/index.html">Inicio</a></li>
             <li><a href="#">Verificar NIS</a></li>
-            <li><a href="#">¿Cómo descargar tu carnet?</a></li>
+            <li><a href="/Front-End/html/roles/usuario/pasoapaso.html">¿Cómo descargar tu carnet?</a></li>
         </ul>
 
         <!-- Opciones del menu lateral-->
@@ -36,7 +36,7 @@
             <ul>
                 <li><a href="/Front-End/index.html">Inicio</a></li>
                 <li><a href="#">Verificar NIS</a></li>
-                <li><a href="#">¿Cómo descargar tu carnet?</a></li>
+                <li><a href="/Front-End/html/roles/usuario/pasoapaso.html">¿Cómo descargar tu carnet?</a></li>
                 <li><a href="/Front-End/html/login/login.html">Iniciar sesión</a></li>
             </ul>
         </div>
@@ -67,32 +67,5 @@
 
 
 </body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.getElementById("hamburger");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const closeBtn = document.getElementById("close-btn");
-
-    // Mostrar menú al hacer clic en el ícono hamburguesa
-    hamburger.addEventListener("click", function () {
-        mobileMenu.style.right = "0";
-    });
-
-    // Cerrar menú al hacer clic en el botón de cerrar
-    closeBtn.addEventListener("click", function () {
-        mobileMenu.style.right = "-100%";
-    });
-
-    // Cerrar menú si se hace clic fuera de él
-    document.addEventListener("click", function (event) {
-        if (!mobileMenu.contains(event.target) && !hamburger.contains(event.target)) {
-            mobileMenu.style.right = "-100%";
-        }
-    });
-});
-
-document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-});
-</script>
+<script src="/Front-End/js/menuMovil.js"></script>
 </html>

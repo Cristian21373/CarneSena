@@ -1,0 +1,85 @@
+Date : 2025-02-11 08:14:21
+Directory : c:\Users\SENA\Documents\CarneSena
+Total : 26 files,  1380 codes, 75 comments, 325 blanks, all 1780 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| CSS             |          3 |        561 |          8 |        135 |        704 |
+| Java            |         15 |        392 |         18 |        134 |        544 |
+| HTML            |          3 |        167 |          3 |         31 |        201 |
+| XML             |          1 |        125 |          0 |          4 |        129 |
+| Batch           |          1 |        108 |         26 |         16 |        150 |
+| JavaScript      |          1 |         16 |          3 |          3 |         22 |
+| Java Properties |          2 |         11 |         17 |          2 |         30 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                      |         26 |      1,380 |         75 |        325 |      1,780 |
+| Front-End                                                                                                              |          7 |        744 |         14 |        169 |        927 |
+| Front-End (Files)                                                                                                      |          1 |         57 |          1 |         13 |         71 |
+| Front-End\css                                                                                                          |          3 |        561 |          8 |        135 |        704 |
+| Front-End\html                                                                                                         |          2 |        110 |          2 |         18 |        130 |
+| Front-End\html\login                                                                                                   |          2 |        110 |          2 |         18 |        130 |
+| Front-End\js                                                                                                           |          1 |         16 |          3 |          3 |         22 |
+| carnesena                                                                                                              |         19 |        636 |         61 |        156 |        853 |
+| carnesena (Files)                                                                                                      |          2 |        233 |         26 |         20 |        279 |
+| carnesena\.mvn                                                                                                         |          1 |          3 |         16 |          1 |         20 |
+| carnesena\.mvn\wrapper                                                                                                 |          1 |          3 |         16 |          1 |         20 |
+| carnesena\src                                                                                                          |         16 |        400 |         19 |        135 |        554 |
+| carnesena\src\main                                                                                                     |         15 |        391 |         19 |        130 |        540 |
+| carnesena\src\main\java                                                                                                |         14 |        383 |         18 |        129 |        530 |
+| carnesena\src\main\java\com                                                                                            |         14 |        383 |         18 |        129 |        530 |
+| carnesena\src\main\java\com\proyecto                                                                                   |         14 |        383 |         18 |        129 |        530 |
+| carnesena\src\main\java\com\proyecto\carnesena                                                                         |         14 |        383 |         18 |        129 |        530 |
+| carnesena\src\main\java\com\proyecto\carnesena (Files)                                                                 |          1 |          9 |          0 |          5 |         14 |
+| carnesena\src\main\java\com\proyecto\carnesena\Jwt                                                                     |          1 |         53 |          0 |         19 |         72 |
+| carnesena\src\main\java\com\proyecto\carnesena\config                                                                  |          2 |         71 |          0 |         20 |         91 |
+| carnesena\src\main\java\com\proyecto\carnesena\controller                                                              |          3 |         82 |          0 |         27 |        109 |
+| carnesena\src\main\java\com\proyecto\carnesena\interfaces                                                              |          1 |          7 |          0 |          8 |         15 |
+| carnesena\src\main\java\com\proyecto\carnesena\model                                                                   |          5 |        101 |         18 |         31 |        150 |
+| carnesena\src\main\java\com\proyecto\carnesena\service                                                                 |          1 |         60 |          0 |         19 |         79 |
+| carnesena\src\main\resources                                                                                           |          1 |          8 |          1 |          1 |         10 |
+| carnesena\src\test                                                                                                     |          1 |          9 |          0 |          5 |         14 |
+| carnesena\src\test\java                                                                                                |          1 |          9 |          0 |          5 |         14 |
+| carnesena\src\test\java\com                                                                                            |          1 |          9 |          0 |          5 |         14 |
+| carnesena\src\test\java\com\proyecto                                                                                   |          1 |          9 |          0 |          5 |         14 |
+| carnesena\src\test\java\com\proyecto\carnesena                                                                         |          1 |          9 |          0 |          5 |         14 |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                                                               | language        | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| c:\Users\SENA\Documents\CarneSena\Front-End\css\index.css                                                              | CSS             |        262 |          5 |         64 |        331 |
+| c:\Users\SENA\Documents\CarneSena\Front-End\css\login.css                                                              | CSS             |        241 |          2 |         60 |        303 |
+| c:\Users\SENA\Documents\CarneSena\Front-End\css\menuMoviles.css                                                        | CSS             |         58 |          1 |         11 |         70 |
+| c:\Users\SENA\Documents\CarneSena\Front-End\html\login\login.html                                                      | HTML            |         58 |          1 |          9 |         68 |
+| c:\Users\SENA\Documents\CarneSena\Front-End\html\login\olvidoContraseña.html                                           | HTML            |         52 |          1 |          9 |         62 |
+| c:\Users\SENA\Documents\CarneSena\Front-End\index.html                                                                 | HTML            |         57 |          1 |         13 |         71 |
+| c:\Users\SENA\Documents\CarneSena\Front-End\js\menuMovil.js                                                            | JavaScript      |         16 |          3 |          3 |         22 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\.mvn\wrapper\maven-wrapper.properties                                      | Java Properties |          3 |         16 |          1 |         20 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\mvnw.cmd                                                                   | Batch           |        108 |         26 |         16 |        150 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\pom.xml                                                                    | XML             |        125 |          0 |          4 |        129 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\CarnesenaApplication.java             | Java            |          9 |          0 |          5 |         14 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\Jwt\JwtAuthenticationFilter.java      | Java            |         53 |          0 |         19 |         72 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\config\ApplicationConfig.java         | Java            |         38 |          0 |         11 |         49 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\config\securityConfig.java            | Java            |         33 |          0 |          9 |         42 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\controller\AuthService.java           | Java            |         42 |          0 |         11 |         53 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\controller\adminController.java       | Java            |         14 |          0 |          5 |         19 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\controller\adminPublicController.java | Java            |         26 |          0 |         11 |         37 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\interfaces\Iadmin.java                | Java            |          7 |          0 |          8 |         15 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\model\Admin.java                      | Java            |         56 |         18 |         20 |         94 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\model\AuthResponse.java               | Java            |         12 |          0 |          3 |         15 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\model\LoginRequest.java               | Java            |         13 |          0 |          3 |         16 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\model\RegisterRequest.java            | Java            |         15 |          0 |          3 |         18 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\model\role.java                       | Java            |          5 |          0 |          2 |          7 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\java\com\proyecto\carnesena\service\JwtService.java               | Java            |         60 |          0 |         19 |         79 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\main\resources\application.properties                                  | Java Properties |          8 |          1 |          1 |         10 |
+| c:\Users\SENA\Documents\CarneSena\carnesena\src\test\java\com\proyecto\carnesena\CarnesenaApplicationTests.java        | Java            |          9 |          0 |          5 |         14 |
+| Total                                                                                                                  |                 |      1,380 |         75 |        325 |      1,780 |
++------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
