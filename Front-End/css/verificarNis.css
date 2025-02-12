@@ -142,7 +142,6 @@ body {
     .welcome-text p {
         max-width: 100%; 
         padding-right: 0; 
-        padding-top: 15px;
         text-align: center; 
     }
 }
@@ -180,152 +179,104 @@ body {
 }
 
 
-
-/*Mensaje de bienvenida e imagen de referencia*/
-
-.welcome-section {
+.verification-section {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
-    width: 100%; 
-    max-width: 100%;
-    padding: 50px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 40px;
     gap: 50px;
 }
 
-.welcome-container {
-    flex: 1.5;
+.verification-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.verification-image img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.verification-container {
+    height: 33em;
+    align-content: center;
+    flex: 1;
     background: white;
+    padding: 40px;
     border-radius: 12px;
-    text-align: left;
-    padding: 63px;
-    min-height: 702px;
-    max-width: 66%;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-.welcome-text h1 {
-    font-size: clamp(40px, 10vw, 130px); 
+.verification-container h2 {
+    font-size: 30px;
     color: #333;
-    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-.welcome-text p {
-    font-size: 26px; 
+.verification-container p {
+    font-size: 18px;
     color: #555;
+    margin-bottom: 20px;
 }
 
-.welcome-image {
-    flex: 0.5;
+.input-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; 
+    gap: 10px;
 }
 
-.welcome-image img {
+.input-container input {
     width: 100%;
-    max-width: 500px; 
-    border-radius: 10px;
+    max-width: 250px;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
 }
 
-/* Responsivo para pantallas más pequeñas */
-@media (max-width: 770px) {
-    .welcome-section {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .welcome-container {
-        text-align: center;
-        max-width: 100%;
-        padding: 40px;
-        min-height: auto;
-    }
-
-    .welcome-image img {
-        width: 80%;
-        max-width: 400px;
-    }
-
-    .welcome-text h1 {
-        font-size: clamp(30px, 6vw, 60px);
-    }
-}
-
-
-@media (max-width: 1300px) {
-    .welcome-text h1 {
-        font-size: clamp(40px, 10vw, 100px);
-    }
-}
-
-@media (max-width: 1120px) {
-    .welcome-section {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .welcome-container {
-        max-width: 90%;
-        padding: 40px;
-    }
-
-    .welcome-text h1 {
-        font-size: clamp(35px, 8vw, 80px);
-    }
-}
-
-
-/*Botones debajo del mensaje*/
-.welcome-buttons {
-    margin-top: 90px;
-    display: flex;
-    gap: 20px;
-}
-
-.welcome-buttons button {
-    padding: 18px 70px;
-    font-family: "Work Sans", serif;
-    font-size: 20px;
+.verify-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #65C472;
+    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease-in-out;
 }
 
-.btn-green {
-    background-color: #65C472;
-    color: white;
-}
-
-.btn-green:hover {
+.verify-btn:hover {
     background-color: #3e7946;
 }
 
-.btn-gray {
-    background-color: #cccccc;
-    color: #333;
-}
-
-.btn-gray:hover {
-    background-color: #a0a0a0;
-}
-
-
-/*los botones se apilan en pantallas pequeñas */
+/* Responsive */
 @media (max-width: 768px) {
-    .welcome-buttons {
-        flex-direction: column; 
-        align-items: center; 
+    .verification-section {
+        flex-direction: column-reverse; /* Cambiar el orden */
+        text-align: center;
+        padding: 20px;
     }
 
-    .welcome-buttons button {
-        width: 100%; 
-        max-width: 350px; 
+    .verification-container {
+        max-width: 100%;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    .input-container input {
+        max-width: 100%;
+    }
+
+    .verify-btn {
+        width: 100%;
     }
 }
-
-

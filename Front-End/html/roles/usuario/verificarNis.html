@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +7,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Olvidar su contraseña</title>
+    <link rel="stylesheet" href="/Front-End/css/verificarNis.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
-    <link rel="stylesheet" href="/Front-End/css/login.css">
+    <title>Verificar NIS</title>
 </head>
-
 <body>
     <nav class="navbar">
         <div class="logo-container">
@@ -29,7 +26,7 @@
         </ul>
 
         <!-- Opciones del menu lateral-->
-        <a href="/Front-End/html/login/login.html"><button class="menu-btn" id="menu-btn">Volver</button></a>
+        <a href="/Front-End/html/login/login.html"><button class="menu-btn" id="menu-btn">Iniciar sesion</button></a>
         <div class="hamburger" id="hamburger">&#9776;</div>
 
         <div class="mobile-menu" id="mobile-menu">
@@ -38,29 +35,26 @@
                 <li><a href="/Front-End/index.html">Inicio</a></li>
                 <li><a href="/Front-End/html/roles/usuario/verificarNis.html">Verificar NIS</a></li>
                 <li><a href="/Front-End/html/roles/usuario/pasoapaso.html">¿Cómo descargar tu carnet?</a></li>
+                <li><a href="/Front-End/html/login/login.html">Iniciar sesión</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="login-container">
-        <h2>¿Olvidaste tu contraseña?</h2>
-        <form>
+
+    <div class="verification-section">
+        <div class="verification-image">
+            <img src="/Front-End/img/imagen-referencia.png" alt="Carné SENA">
+        </div>
+        
+        <div class="verification-container">
+            <h2>Verifica tu NIS</h2>
+            <p>Ingresa tu Número de Identificación de Servicio (NIS) para validar tu registro en el sistema.</p>
             <div class="input-container">
-                <label for="username">Correo Electrónico:</label>
-                <input type="text" id="username" name="username" required placeholder="Ingrese su correo electrónico">
-                <i class="fa-regular fa-envelope"></i>
+                <input type="text" id="nis" name="nis" required placeholder="Ingrese su NIS">
+                <button class="verify-btn">Verificar</button>
             </div>
-
-
-            <button type="submit" class="login-btn">Ingresar</button>
-            <div class="solo-movil">
-            <a href="/Front-End/html/login/login.html" class="mobile-back-btn">Volver</a>
-                
-            </div>
-
-        </form>
+        </div>
     </div>
 </body>
 <script src="/Front-End/js/menuMovil.js"></script>
-
 </html>
