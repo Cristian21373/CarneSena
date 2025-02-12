@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel del carne</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Front-End/css/panelAdmin.css">
+    <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
+    <title>Control CarneSENA</title>
 </head>
 <body>
-    <h1>Apartado de panel para control de carne</h1>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="/Front-End/img/logo.png" alt="Logo" id="logo">
+            <span class="logo-text">CarneSENA</span>
+        </div>
+        <ul class="menu-list">
+            <li><a href="#">Carne</a></li>
+            <li><a href="#">Crear ficha</a></li>
+            <li><a href="#">Registrar administrador</a></li>
+            <li><a href="#">Cerrar sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/Front-End/img/logo.png" alt="Logo" id="logo">
+                <div class="separator"></div>
+                <span class="logo-text">CarneSENA</span>
+            </div>
+
+            <div class="hamburger" id="hamburger">&#9776;</div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <span class="close-btn" id="close-btn">&times;</span>
+                <ul>
+                    <li><a href="#">Carne</a></li>
+                    <li><a href="#">Crear ficha</a></li>
+                    <li><a href="#">Registrar administrador</a></li>
+                    <li><a href="#">Cerrar sesion</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </body>
+<script src="/Front-End/js/menuMovil.js"></script>
 </html>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
@@ -11,6 +13,7 @@
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Verificar NIS</title>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo-container">
@@ -45,7 +48,7 @@
         <div class="verification-image">
             <img src="/Front-End/img/imagen-referencia.png" alt="Carné SENA">
         </div>
-        
+
         <div class="verification-container">
             <h2>Verifica tu NIS</h2>
             <p>Ingresa tu Número de Identificación de Servicio (NIS) para validar tu registro en el sistema.</p>
@@ -57,4 +60,19 @@
     </div>
 </body>
 <script src="/Front-End/js/menuMovil.js"></script>
+<script>
+    window.onload = function () {
+        if (!localStorage.getItem('alertShown')) {
+            Swal.fire({
+                title: '¡Bienvenido!',
+                text: 'Si el NIS que ingrese no está registrado en esta plataforma, no podrá descargar su carné. Esto no significa que no esté registrado en Sofía Plus. Un administrador deberá registrar su NIS en esta plataforma para que pueda proceder con la descarga.',
+                icon: 'info', 
+                confirmButtonText: 'Entendido'
+            });
+
+            localStorage.setItem('alertShown', 'true');
+        }
+    }
+</script>
+
 </html>
