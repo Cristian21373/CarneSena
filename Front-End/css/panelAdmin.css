@@ -394,6 +394,15 @@ body {
     padding: 10px;
 }
 
+.crud-table th:nth-child(2),
+.crud-table td:nth-child(2) {
+    white-space: normal;
+    max-width: 300px;
+    word-wrap: break-word;
+    text-align: left;
+    padding: 10px;
+}
+
 .crud-table th:nth-child(3),
 .crud-table td:nth-child(3) {
     white-space: normal;
