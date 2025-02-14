@@ -125,7 +125,7 @@ body {
     display: block;
     margin-bottom: -20px;
     border-radius: 5px;
-    transition: background 0.3s ease, transform 0.2s ease; 
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .sidebar .menu-list li a:hover {
@@ -230,7 +230,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease; 
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .search-btn:hover {
@@ -325,15 +325,17 @@ body {
 
 .btn-editar:hover {
     background-color: #929225;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-eliminar {
-    background-color:rgb(255, 105, 86) ;
+    background-color: rgb(255, 105, 86);
     color: white;
 }
 
 .btn-eliminar:hover {
     background-color: #d42a2a;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-descargar {
@@ -342,6 +344,7 @@ body {
 }
 
 .btn-descargar:hover {
+    transition: background 0.3s ease, transform 0.2s ease;
     background-color: #3e35c0;
 }
 
@@ -428,6 +431,7 @@ body {
     gap: 15px;
 }
 
+/*Botones con la opcion de agregar*/
 .new-nis {
     background: #65c472;
     border: none;
@@ -441,6 +445,23 @@ body {
 }
 
 .new-nis:hover {
+    background: #4e9758;
+    transform: scale(1.05);
+}
+
+.new-ficha {
+    background: #65c472;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.new-ficha:hover {
     background: #4e9758;
     transform: scale(1.05);
 }
