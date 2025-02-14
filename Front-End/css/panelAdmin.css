@@ -318,23 +318,35 @@ body {
     display: inline-block;
 }
 
-.btn-options {
-    background-color: #3498db;
+.btn-editar {
+    background-color: #d3d335;
     color: white;
 }
 
-.btn-options:hover {
-    background-color: #217dbb;
+.btn-editar:hover {
+    background-color: #929225;
 }
 
-.btn-download {
-    background-color: #2ecc71;
+.btn-eliminar {
+    background-color:rgb(255, 105, 86) ;
     color: white;
 }
 
-.btn-download:hover {
-    background-color: #25a25a;
+.btn-eliminar:hover {
+    background-color: #d42a2a;
 }
+
+.btn-descargar {
+    background-color: #655bf1;
+    color: white;
+}
+
+.btn-descargar:hover {
+    background-color: #3e35c0;
+}
+
+
+
 
 /* Hacer la tabla responsive */
 @media (max-width: 992px) {
