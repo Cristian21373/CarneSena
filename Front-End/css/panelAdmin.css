@@ -124,12 +124,15 @@ body {
     padding: 13px;
     display: block;
     margin-bottom: -20px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease; 
 }
 
 .sidebar .menu-list li a:hover {
-    background-color: #65C472;
+    background-color: #65c472;
+    color: white;
     border-radius: 5px;
-    color: #fff;
+    transform: scale(1.05);
 }
 
 
@@ -227,6 +230,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease; 
 }
 
 .search-btn:hover {
