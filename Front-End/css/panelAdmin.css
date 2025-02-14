@@ -306,6 +306,12 @@ body {
     border-radius: 5px;
 }
 
+.crud-table tbody tr.selected {
+    background-color: #d9f3df !important; /* Un verde suave para destacar */
+    transition: background 0.3s ease-in-out;
+}
+
+
 /*Estilos para los botones*/
 .table-btn {
     padding: 8px 12px;

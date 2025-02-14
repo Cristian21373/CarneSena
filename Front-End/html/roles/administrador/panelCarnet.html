@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/Front-End/css/panelAdmin.css">
+    <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Control CarneSENA</title>
 </head>
 
@@ -94,7 +95,6 @@
                         <button class="table-btn btn-descargar"><i class="fa-solid fa-file-arrow-down"></i></button>
                     </td>
                 </tr> -->
-
             </tbody>
         </table>
 
@@ -105,5 +105,18 @@
     </div>
 </body>
 <script src="/Front-End/js/menuMovil.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const rows = document.querySelectorAll(".crud-table tbody tr");
+
+    rows.forEach(row => {
+        row.addEventListener("click", function () {
+            rows.forEach(r => r.classList.remove("selected"));
+            this.classList.add("selected");
+        });
+    });
+});
+
+</script>
 
 </html>

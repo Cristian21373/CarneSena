@@ -96,5 +96,18 @@
     </div>
 </body>
 <script src="/Front-End/js/menuMovil.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const rows = document.querySelectorAll(".crud-table tbody tr");
+
+    rows.forEach(row => {
+        row.addEventListener("click", function () {
+            rows.forEach(r => r.classList.remove("selected"));
+            this.classList.add("selected");
+        });
+    });
+});
+
+</script>
 
 </html>
