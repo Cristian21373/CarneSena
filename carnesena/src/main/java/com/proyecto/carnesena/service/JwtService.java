@@ -3,7 +3,6 @@ package com.proyecto.carnesena.service;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,63 +15,58 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Service
-public class JwtService {
+public class jwtService {
 
-    private static final String SECRET_KEY="111111111111122222222222222333333333333333333";
+    private static final String secret_key = "pcd8to9FqF+7aBE888ygGp3HoCY6MOPgr76f0HUlrKQ=";
 
-    public String getToken(UserDetails admin) {
-        return getToken(new HashMap<>(), admin);
+    public String getToken(UserDetails userData) {
+        return getToken(new HashMap<>(), userData);
     }
 
-    private String getToken(Map<String, Object> extraClaims, UserDetails admin) {
+    private String getToken(HashMap<String, Object> extraClaims, UserDetails userData) {
         return Jwts
-        .builder()
-        .setClaims(extraClaims)
-        .setSubject(admin.getUsername())
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
-        .signWith(getKey(), SignatureAlgorithm.HS256)
-        .compact();
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userData.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))// 1 hora de vigencia al token
+                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     private Key getKey() {
-        byte[] keyBytes=Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(secret_key);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String getUsernameFromToken(String token) {
-        return getClaim(token, Claims::getSubject);
+        return getClaims(token, Claims::getSubject);
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username= getUsernameFromToken(token);
+        final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-
-    private Claims getAllClaims(String token){
-        return Jwts
-            .parserBuilder()
-            .setSigningKey(getKey())
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
+    private boolean isTokenExpired(String token) {
+        return getExpiration(token).before(new Date());
     }
 
+    private Date getExpiration(String token) {
+        return getClaims(token, Claims::getExpiration);
+    }
 
-    public <T> T getClaim(String token, Function<Claims,T> claimsResolver){
+    public Claims getAllClaims(String token) {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public <T> T getClaims(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaims(token);
         return claimsResolver.apply(claims);
-    }
-
-
-    private Date getExpiration(String token)
-    {
-        return getClaim(token, Claims::getExpiration);
-    }
-
-    private boolean isTokenExpired(String token){
-
-        return getExpiration(token).before(new Date());
     }
 }
