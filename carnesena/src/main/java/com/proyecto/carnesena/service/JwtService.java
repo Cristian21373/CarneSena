@@ -8,6 +8,8 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.proyecto.carnesena.model.admin;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,15 +26,19 @@ public class jwtService {
     }
 
     private String getToken(HashMap<String, Object> extraClaims, UserDetails userData) {
+        // Agregar el rol del usuario al token
+        extraClaims.put("role", ((admin) userData).getRole().name()); 
+    
         return Jwts
-                .builder()
-                .setClaims(extraClaims)
-                .setSubject(userData.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))// 1 hora de vigencia al token
-                .signWith(getKey(), SignatureAlgorithm.HS256)
-                .compact();
+            .builder()
+            .setClaims(extraClaims) 
+            .setSubject(userData.getUsername())
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hora de vigencia
+            .signWith(getKey(), SignatureAlgorithm.HS256)
+            .compact();
     }
+    
 
     private Key getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secret_key);

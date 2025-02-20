@@ -27,8 +27,13 @@ public class securityConfig {
                                 .csrf(csrf -> csrf.disable())
                                 .authorizeHttpRequests(
                                                 autRequest -> autRequest
-                                                                .requestMatchers("/api/v1/public/**").permitAll()
-                                                                .anyRequest().authenticated())
+                                                                .requestMatchers("/api/v1/public/user/login/",
+                                                                                "/api/v1/public/user/register/")
+                                                                .permitAll()
+                                                                .requestMatchers("/api/v1/admin/**")
+                                                                .hasAuthority("ADMIN") 
+                                                                                       
+                                                                .anyRequest().denyAll())
                                 // .formLogin(withDefaults())
                                 // .build();
                                 .sessionManagement(sessionManagement -> sessionManagement
