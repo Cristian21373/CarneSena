@@ -28,7 +28,8 @@
             <li><a href="/Front-End/html/roles/administrador/panelFicha.html"><i class="fa-solid fa-circle-plus"></i>
                     Crear ficha</a></li>
             <li><a href="#"><i class="fa-solid fa-user-tie"></i> Nuevo administrador</a></li>
-            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+            <li><a href="#" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+
         </ul>
     </div>
 
@@ -104,19 +105,8 @@
 
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/Front-End/js/menuMovil.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const rows = document.querySelectorAll(".crud-table tbody tr");
-
-    rows.forEach(row => {
-        row.addEventListener("click", function () {
-            rows.forEach(r => r.classList.remove("selected"));
-            this.classList.add("selected");
-        });
-    });
-});
-
-</script>
-
+<script src="/Front-End/js/Seguridad.js"></script>
 </html>

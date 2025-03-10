@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $("form").on("submit", function (e) {
         e.preventDefault(); // Evita que el formulario se recargue
@@ -30,7 +31,16 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr) {
-                let errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "Error en la autenticación";
+                let errorMessage = "Error en la autenticación";
+
+                if (xhr.status === 401) {
+                    errorMessage = "Usuario o contraseña incorrectos. Inténtalo nuevamente.";
+                } else if (xhr.status === 403) {
+                    errorMessage = "No tienes permisos para acceder.";
+                } else if (xhr.status === 500) {
+                    errorMessage = "Error del servidor. Intenta más tarde.";
+                }
+
                 Swal.fire("Error", errorMessage, "error");
             }
         });
