@@ -25,38 +25,39 @@ public class usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_usuario", nullable = false, length = 36)
+    @Column(name = "id_usuario", nullable = true, length = 36)
     private String id_usuario;
 
-    @Column(name = "foto", nullable = false, length = 50)
+    @Column(name = "foto", nullable = true, length = 50)
     private String foto;
-
-    @Column(name = "nombre", nullable = false, length = 50)
+    
+    @Column(name = "nombre", nullable = true, length = 50)
     private String nombre;
-
-    @Column(name = "apellidos", nullable = false, length = 50)
+    
+    @Column(name = "apellidos", nullable = true, length = 50)
     private String apellidos;
-
+    
     @Enumerated(EnumType.STRING)
+    @Column(nullable = true) 
     private tipo_documento tipo_documento;
-
-    @Column(name="tipo_sangre", nullable = false, length = 3)
+    
+    @Column(name="tipo_sangre", nullable = true, length = 3)
     private String tipo_sangre;
-
-    @Column(name = "numero_documento", nullable = false, length = 12)
-    private int numero_documento;
-
+    
+    @Column(name = "numero_documento", nullable = true, length = 12)
+    private Integer numero_documento; 
+    
     @Column(name = "nis", nullable = false, length = 8)
-    private int nis;
-
+    private int nis; 
+    
     @ManyToOne
-    @JoinColumn(name = "ficha")
+    @JoinColumn(name = "ficha", nullable = true)
     private ficha ficha;
-
+    
     @Enumerated(EnumType.STRING)
+    @Column(nullable = true) 
     private estado_user estado_user;
-
-        
+    
     public String getId() {
         return id_usuario;
     }
