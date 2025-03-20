@@ -1,6 +1,7 @@
 package com.proyecto.carnesena.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,21 @@ public class fichaService implements IFichaService {
         return ListFicha;
     }
 
-    // @Override
-    // public List<ficha> filtroFicha(int filtro) {
-    //     return data.findByCodigo_ficha(filtro);
-    // }
+    @Override
+    public List<ficha> filtroFicha(int codigoFicha) {
+        return data.filtroFicha(codigoFicha);
+    }
+
+    @Override
+    public Optional<ficha> findOne(String id) {
+        Optional<ficha> ficha=data.findById(id);
+		return ficha;
+    }
+
+    @Override
+    public int delete(String id) {
+        data.deleteById(id);
+		return 1;
+    }
 
 }

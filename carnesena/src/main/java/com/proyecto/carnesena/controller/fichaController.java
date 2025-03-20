@@ -5,7 +5,11 @@ package com.proyecto.carnesena.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +56,49 @@ public class fichaController {
         fichaService.save(ficha);
         return new ResponseEntity<>(ficha,HttpStatus.OK);
     }
+
+
+    @GetMapping("/")
+    public ResponseEntity<Object> findAll() {
+        var ListFicha = fichaService.findAll();
+        return new ResponseEntity<>(ListFicha, HttpStatus.OK);
+    }
+
+    @GetMapping("/busquedafiltro/{filtro}")
+    public ResponseEntity<Object> findFiltro(@PathVariable int filtro) {
+        var ListFicha = fichaService.filtroFicha(filtro);
+        return new ResponseEntity<>(ListFicha, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id_ficha}")
+    public ResponseEntity<Object> findOne(@PathVariable("id_ficha") String id) {
+        var ficha = fichaService.findById(id);
+        return new ResponseEntity<>(ficha, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id_ficha}")
+    public ResponseEntity<Object> delete(@PathVariable("id_ficha") String id_ficha) {
+        fichaService.deleteById(id_ficha);
+        return new ResponseEntity<>("Registro Eliminado", HttpStatus.OK);
+    }
+
+
+    @PutMapping("/{id_ficha}")
+    public ResponseEntity<Object> update(@PathVariable("id_ficha") String id_ficha, @RequestBody ficha fichaUpdate){
+	    var ficha = fichaService.findById(id_ficha).orElse(null);
+	    if (ficha != null) {
+	        ficha.setNombre_programa(fichaUpdate.getNombre_programa());
+            ficha.setCodigo_ficha(fichaUpdate.getCodigo_ficha());
+            ficha.setEstado_ficha(fichaUpdate.getEstado_ficha());
+            ficha.setFecha_inicio(fichaUpdate.getFecha_inicio());
+            ficha.setFecha_fin(fichaUpdate.getFecha_fin());
+	        
+	        fichaService.save(ficha);
+	        return new ResponseEntity<>("Guardado", HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>("Error: ficha no encontrado", HttpStatus.BAD_REQUEST);
+	    }
+	}
 
 
 

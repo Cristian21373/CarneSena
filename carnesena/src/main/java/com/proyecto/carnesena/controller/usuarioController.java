@@ -1,6 +1,14 @@
 package com.proyecto.carnesena.controller;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
+import java.util.UUID;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.carnesena.interfaces.Iusuario;
 import com.proyecto.carnesena.model.usuario;
@@ -23,6 +33,7 @@ public class usuarioController {
 
     @Autowired
     private Iusuario usuarioService;
+    private static final String UPLOAD_DIR = "uploads/";
 
     @PostMapping("/registrar-nis")
     public ResponseEntity<Object> registrarNis(@RequestBody usuario usuario) {
@@ -42,6 +53,69 @@ public class usuarioController {
         return new ResponseEntity<>("NIS registrado correctamente", HttpStatus.OK);
     }
 
+    // @PostMapping("/subir-imagen/{id_usuario}")
+    // public ResponseEntity<Object> subirImagen(@PathVariable String id_usuario,
+    //         @RequestParam("file") MultipartFile file) {
+    //     try {
+    //         // 1️⃣ Buscar el usuario
+    //         usuario usuario = usuarioService.findById(id_usuario).orElse(null);
+    //         if (usuario == null) {
+    //             return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
+    //         }
+
+    //         // 2️⃣ Validar que el archivo no esté vacío
+    //         if (file.isEmpty()) {
+    //             return new ResponseEntity<>("El archivo está vacío", HttpStatus.BAD_REQUEST);
+    //         }
+
+    //         // 3️⃣ Definir la ruta de almacenamiento
+    //         String directorio = "uploads/";
+    //         File carpeta = new File(directorio);
+    //         if (!carpeta.exists()) {
+    //             carpeta.mkdirs(); // Crea la carpeta si no existe
+    //         }
+
+    //         // 4️⃣ Guardar la imagen en el servidor
+    //         String nombreArchivo = UUID.randomUUID() + "_" + file.getOriginalFilename();
+    //         Path rutaArchivo = Paths.get(directorio + nombreArchivo);
+    //         Files.write(rutaArchivo, file.getBytes());
+
+    //         // 5️⃣ Generar la URL (puedes cambiarla según tu configuración)
+    //         String urlImagen = "http://localhost:8080/uploads/" + nombreArchivo;
+
+    //         // 6️⃣ Guardar la URL en la BD
+    //         usuario.setFoto(urlImagen);
+    //         usuarioService.save(usuario);
+
+    //         return new ResponseEntity<>("Imagen subida correctamente: " + urlImagen, HttpStatus.OK);
+
+    //     } catch (Exception e) {
+    //         return new ResponseEntity<>("Error al subir la imagen", HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            // Crear la carpeta "uploads" si no existe
+            Files.createDirectories(Paths.get(UPLOAD_DIR));
+
+            // Generar un nombre único para la imagen
+            String nombreArchivo = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            Path rutaArchivo = Paths.get(UPLOAD_DIR).resolve(nombreArchivo);
+            
+            // Guardar la imagen en el servidor
+            Files.copy(file.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
+
+            // URL de la imagen
+            String urlImagen = "http://localhost:8080/uploads/" + nombreArchivo;
+            return ResponseEntity.ok().body("{\"url\": \"" + urlImagen + "\"}");
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Error al subir la imagen");
+        }
+    }
+
+    
     @GetMapping("/verificar-nis/{nis}")
     public ResponseEntity<Object> verificarNis(@PathVariable("nis") int nis) {
         Optional<usuario> usuarioExistente = usuarioService.findByNis(nis);

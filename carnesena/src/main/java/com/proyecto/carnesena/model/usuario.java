@@ -28,8 +28,8 @@ public class usuario {
     @Column(name = "id_usuario", nullable = true, length = 36)
     private String id_usuario;
 
-    @Column(name = "foto", nullable = true, length = 50)
-    private String foto;
+    @Column(name = "foto", columnDefinition = "LONGTEXT")
+    private String foto;    
     
     @Column(name = "nombre", nullable = true, length = 50)
     private String nombre;
