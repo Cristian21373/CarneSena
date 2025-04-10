@@ -15,7 +15,7 @@
     <title>Control CarneSENA</title>
 </head>
 
-<body>
+<body">
     <div class="sidebar">
         <div class="logo-container">
             <img src="/Front-End/img/logo.png" alt="Logo" id="logo">
@@ -56,7 +56,8 @@
         <div class="top-bar">
             <div class="title-container">
                 <h2 class="page-title">Carne</h2>
-                <button class="new-nis">Agregar NIS</button>
+                <button class="new-nis" id="btnAbrirModalNis">Agregar NIS</button>
+
             </div>
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Buscar...">
@@ -79,34 +80,75 @@
                     <th>Opciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- <tr>
-                    <td><img src="/Front-End/img/logo.png" alt="Foto"></td>
-                    <td>123456</td>
-                    <td>Cristian Jeanpool</td>
-                    <td>Bahamon Granados</td>
-                    <td>Cédula de ciudadania</td>
-                    <td>987654321</td>
-                    <td>456789</td>
-                    <td>ANALISIS Y DESARROLLO DE SOFTWARE</td>
-                    <td>Completado</td>
-                    <td>
-                        <button class="table-btn btn-editar"><i class="fa-solid fa-user-pen"></i></button>
-                        <button class="table-btn btn-eliminar"><i class="fa-solid fa-trash"></i></button>
-                        <button class="table-btn btn-descargar"><i class="fa-solid fa-file-arrow-down"></i></button>
-                    </td>
-                </tr> -->
+            <tbody id="cuerpoTabla">
+
             </tbody>
         </table>
-
-
-
-
-
     </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/Front-End/js/menuMovil.js"></script>
-<script src="/Front-End/js/Seguridad.js"></script>
+
+    <!-- MODAL AGREGAR NIS -->
+    <div id="modalAgregarNis" class="modal">
+        <div class="modal-content modern-nis">
+            <span class="close-btn" id="cerrarModalNis">&times;</span>
+            <h2 class="modal-title">¿Cómo quieres agregar el NIS?</h2>
+            <div class="option-cards">
+                <div class="option-card" id="opcionManual">
+                    <i class="fa-solid fa-keyboard"></i>
+                    <h3>Agregar Manualmente</h3>
+                    <p>Escribe uno por uno los NIS que necesitas registrar.</p>
+                </div>
+                <div class="option-card" id="abrirModalExcel">
+                    <i class="fa-solid fa-file-excel"></i>
+                    <h3>Agregar por Excel</h3>
+                    <p>Sube un archivo Excel con los NIS que deseas agregar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL INGRESAR NIS MANUAL -->
+    <div id="modalManualNis" class="modal">
+        <div class="modal-content manual">
+            <button id="btnVolver" class="btn-volver">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>
+            <h2 class="modal-title">Registrar NIS Manualmente</h2>
+            <input type="text" id="nisInput" placeholder="Ingresa el NIS" class="input-nis">
+            <button id="registrarNisBtn" class="modal-btn manual">Registrar NIS</button>
+        </div>
+    </div>
+
+
+    <div id="modalExcel" class="modal-excel" style="display: none;">
+        <div class="modal-contenido-excel">
+            <button id="btnVolverExcel" class="btn-volver">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>            
+            <h2>Cargar usuarios desde Excel</h2>
+            <p>Selecciona un archivo .xlsx con los NIS a registrar.</p>
+            <input type="file" id="archivoExcel" accept=".xlsx" class="archivo-input-excel" />
+            <div class="botones-excel">
+                <button id="btnSubirExcel" class="btn-excel subir-excel">Subir archivo</button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    
+
+
+
+
+
+
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/Front-End/js/menuMovil.js"></script>
+    <script src="/Front-End/js/Seguridad.js"></script>
+    <script src="/Front-End/js/jsUrl/Urls.js"></script>
+    <script src="/Front-End/js/usuario.js"></script>
+
 </html>

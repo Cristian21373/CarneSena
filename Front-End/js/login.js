@@ -12,7 +12,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "http://localhost:8080/api/v1/public/user/login/", 
+            url: urlLogin, 
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ username: username, password: password }),

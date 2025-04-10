@@ -27,7 +27,7 @@ public class ficha {
     @Column(name = "id_ficha", nullable = false, length = 36)
     private String id_ficha;
 
-    @Column(name = "nombre_programa", nullable = false, length = 40)
+    @Column(name = "nombre_programa", nullable = false, length = 120)
     private String nombre_programa;
 
     @Column(name = "codigo_ficha", nullable = false, length = 7)

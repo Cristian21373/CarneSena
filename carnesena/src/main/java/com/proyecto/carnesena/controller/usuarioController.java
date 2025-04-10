@@ -1,15 +1,19 @@
 package com.proyecto.carnesena.controller;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
-
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.carnesena.interfaces.Iusuario;
+import com.proyecto.carnesena.model.estado_user;
 import com.proyecto.carnesena.model.usuario;
 
 @RestController
@@ -48,62 +53,44 @@ public class usuarioController {
 
         usuario nuevoUsuario = new usuario();
         nuevoUsuario.setNis(usuario.getNis());
+        nuevoUsuario.setEstado_user(estado_user.creado);
         usuarioService.save(nuevoUsuario);
 
         return new ResponseEntity<>("NIS registrado correctamente", HttpStatus.OK);
     }
 
-    // @PostMapping("/subir-imagen/{id_usuario}")
-    // public ResponseEntity<Object> subirImagen(@PathVariable String id_usuario,
-    //         @RequestParam("file") MultipartFile file) {
-    //     try {
-    //         // 1️⃣ Buscar el usuario
-    //         usuario usuario = usuarioService.findById(id_usuario).orElse(null);
-    //         if (usuario == null) {
-    //             return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
-    //         }
-
-    //         // 2️⃣ Validar que el archivo no esté vacío
-    //         if (file.isEmpty()) {
-    //             return new ResponseEntity<>("El archivo está vacío", HttpStatus.BAD_REQUEST);
-    //         }
-
-    //         // 3️⃣ Definir la ruta de almacenamiento
-    //         String directorio = "uploads/";
-    //         File carpeta = new File(directorio);
-    //         if (!carpeta.exists()) {
-    //             carpeta.mkdirs(); // Crea la carpeta si no existe
-    //         }
-
-    //         // 4️⃣ Guardar la imagen en el servidor
-    //         String nombreArchivo = UUID.randomUUID() + "_" + file.getOriginalFilename();
-    //         Path rutaArchivo = Paths.get(directorio + nombreArchivo);
-    //         Files.write(rutaArchivo, file.getBytes());
-
-    //         // 5️⃣ Generar la URL (puedes cambiarla según tu configuración)
-    //         String urlImagen = "http://localhost:8080/uploads/" + nombreArchivo;
-
-    //         // 6️⃣ Guardar la URL en la BD
-    //         usuario.setFoto(urlImagen);
-    //         usuarioService.save(usuario);
-
-    //         return new ResponseEntity<>("Imagen subida correctamente: " + urlImagen, HttpStatus.OK);
-
-    //     } catch (Exception e) {
-    //         return new ResponseEntity<>("Error al subir la imagen", HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
-
     @PostMapping("/upload")
     public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
         try {
+            // Validar el tipo de archivo (solo PNG y JPG)
+            String contentType = file.getContentType();
+            if (contentType == null || (!contentType.equals("image/png") && !contentType.equals("image/jpeg"))) {
+                return ResponseEntity.badRequest().body("Solo se permiten imágenes en formato PNG o JPG.");
+            }
+
+            // Obtener el nombre original del archivo
+            String nombreOriginal = file.getOriginalFilename();
+
+            // Validar que el nombre del archivo no contenga espacios ni caracteres
+            // inválidos
+            if (nombreOriginal == null || nombreOriginal.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("El nombre del archivo no puede estar vacío.");
+            }
+
+            // Expresión regular para verificar caracteres no permitidos (espacios y
+            // caracteres especiales)
+            if (!nombreOriginal.matches("^[a-zA-Z0-9._-]+$")) {
+                return ResponseEntity.badRequest().body(
+                        "El nombre del archivo contiene espacios o caracteres no permitidos. Usa solo letras, números, guiones y puntos.");
+            }
+
             // Crear la carpeta "uploads" si no existe
             Files.createDirectories(Paths.get(UPLOAD_DIR));
 
             // Generar un nombre único para la imagen
-            String nombreArchivo = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String nombreArchivo = UUID.randomUUID() + "_" + nombreOriginal;
             Path rutaArchivo = Paths.get(UPLOAD_DIR).resolve(nombreArchivo);
-            
+
             // Guardar la imagen en el servidor
             Files.copy(file.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
 
@@ -115,7 +102,6 @@ public class usuarioController {
         }
     }
 
-    
     @GetMapping("/verificar-nis/{nis}")
     public ResponseEntity<Object> verificarNis(@PathVariable("nis") int nis) {
         Optional<usuario> usuarioExistente = usuarioService.findByNis(nis);
@@ -153,7 +139,6 @@ public class usuarioController {
 
     @PutMapping("/actualizar-datos/{nis}")
     public ResponseEntity<Object> actualizarUsuario(@PathVariable("nis") int nis, @RequestBody usuario usuarioUpdate) {
-        // Buscar usuario por NIS
         Optional<usuario> usuarioExistente = usuarioService.findByNis(nis);
 
         if (!usuarioExistente.isPresent()) {
@@ -161,6 +146,15 @@ public class usuarioController {
         }
 
         usuario usuario = usuarioExistente.get();
+
+        // 🚨 BLOQUEA la edición si el usuario ya está COMPLETADO o DESCARGADO
+        if (usuario.getEstado_user() == estado_user.completo || usuario.getEstado_user() == estado_user.descargado) {
+            return new ResponseEntity<>(
+                    "No se pueden registrar datos porque el usuario ya está en estado COMPLETADO o DESCARGADO",
+                    HttpStatus.FORBIDDEN);
+        }
+
+        // ✅ Si no está COMPLETADO, permite actualizar
         usuario.setFoto(usuarioUpdate.getFoto());
         usuario.setNombre(usuarioUpdate.getNombre());
         usuario.setApellidos(usuarioUpdate.getApellidos());
@@ -168,10 +162,85 @@ public class usuarioController {
         usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
         usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
         usuario.setFicha(usuarioUpdate.getFicha());
-        usuario.setEstado_user(usuarioUpdate.getEstado_user());
+        usuario.setEstado_user(estado_user.completo); // Cambia el estado a COMPLETO
 
         usuarioService.save(usuario);
-        return new ResponseEntity<>("Usuario actualizado correctamente", HttpStatus.OK);
+        return new ResponseEntity<>("Datos de usuario registrados correctamente", HttpStatus.OK);
     }
 
+    @PutMapping("/editar/{id_usuario}")
+    public ResponseEntity<Object> editarUsuario(@PathVariable("id_usuario") String id,
+            @RequestBody usuario usuarioUpdate,
+            @RequestParam(value = "admin", required = false, defaultValue = "false") boolean admin) {
+        Optional<usuario> usuarioExistente = usuarioService.findById(id);
+
+        if (!usuarioExistente.isPresent()) {
+            return new ResponseEntity<>("El usuario con ese ID no existe", HttpStatus.NOT_FOUND);
+        }
+
+        usuario usuario = usuarioExistente.get();
+
+        if (!admin && usuario.getEstado_user() == estado_user.completo) {
+            return new ResponseEntity<>("No se puede editar un usuario en estado COMPLETO", HttpStatus.FORBIDDEN);
+        }
+
+        usuario.setFoto(usuarioUpdate.getFoto());
+        usuario.setNombre(usuarioUpdate.getNombre());
+        usuario.setApellidos(usuarioUpdate.getApellidos());
+        usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
+        usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
+        usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
+        usuario.setFicha(usuarioUpdate.getFicha());
+
+        if (admin) {
+            usuario.setEstado_user(usuarioUpdate.getEstado_user());
+        } else {
+            usuario.setEstado_user(estado_user.actualizacion);
+        }
+
+        usuarioService.save(usuario);
+        return new ResponseEntity<>("Datos de usuario actualizados correctamente", HttpStatus.OK);
+    }
+
+    @PostMapping("/carga-masiva-nis")
+    public ResponseEntity<Object> cargaMasivaNis(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return new ResponseEntity<>("El archivo está vacío", HttpStatus.BAD_REQUEST);
+        }
+
+        List<Integer> nisRegistrados = new ArrayList<>();
+        List<Integer> nisDuplicados = new ArrayList<>();
+
+        try (InputStream inputStream = file.getInputStream(); Workbook workbook = WorkbookFactory.create(inputStream)) {
+            Sheet sheet = workbook.getSheetAt(0); // Leer la primera hoja
+
+            for (Row row : sheet) {
+                Cell cell = row.getCell(2); // Primera columna (NIS)
+                if (cell == null || cell.getCellType() != CellType.NUMERIC) {
+                    continue; // Saltar filas vacías o con datos inválidos
+                }
+
+                int nis = (int) cell.getNumericCellValue();
+                Optional<usuario> usuarioExistente = usuarioService.findByNis(nis);
+
+                if (usuarioExistente.isPresent()) {
+                    nisDuplicados.add(nis); // NIS ya existe, no lo guardamos
+                } else {
+                    usuario nuevoUsuario = new usuario();
+                    nuevoUsuario.setNis(nis);
+                    nuevoUsuario.setEstado_user(estado_user.creado);
+                    usuarioService.save(nuevoUsuario);
+                    nisRegistrados.add(nis);
+                }
+            }
+
+            Map<String, Object> respuesta = new HashMap<>();
+            respuesta.put("registrados", nisRegistrados.size());
+            respuesta.put("duplicados", nisDuplicados.size());
+
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Error al procesar el archivo", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

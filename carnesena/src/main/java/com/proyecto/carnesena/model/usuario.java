@@ -47,12 +47,14 @@ public class usuario {
     @Column(name = "numero_documento", nullable = true, length = 12)
     private Integer numero_documento; 
     
-    @Column(name = "nis", nullable = false, length = 8)
+    @Column(name = "nis", nullable = false, length = 10)
     private int nis; 
     
     @ManyToOne
     @JoinColumn(name = "ficha", nullable = true)
     private ficha ficha;
+
+    
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = true) 

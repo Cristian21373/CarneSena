@@ -37,7 +37,7 @@ function parseJwt(token) {
 // automaticamente lo saque o si el admin quiere continuar en sesion pues ahi estara el boton para ello
 
 $(document).ready(function () {
-    let inactivityTime = 20 * 1000; // 20 segundos de inactividad antes de la advertencia
+    let inactivityTime = 50 * 1000; // 20 segundos de inactividad antes de la advertencia
     let warningTime = 30 * 1000; // 30 segundos para decidir antes de cerrar sesión automáticamente
     let timeout, warningTimeout;
 

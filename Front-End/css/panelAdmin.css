@@ -307,7 +307,8 @@ body {
 }
 
 .crud-table tbody tr.selected {
-    background-color: #d9f3df !important; /* Un verde suave para destacar */
+    background-color: #d9f3df !important;
+    /* Un verde suave para destacar */
     transition: background 0.3s ease-in-out;
 }
 
@@ -494,3 +495,300 @@ body {
         max-width: 200px;
     }
 }
+
+/* DISEÑO MODAL DE AGREGAR NIS */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content.modern-nis {
+    background: linear-gradient(to bottom right, #ffffff, #f9fafb);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    width: 95%;
+    max-width: 600px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+    animation: slideUp 0.4s ease-in-out;
+}
+
+.modal-title {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #111827;
+}
+
+.option-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.option-card {
+    background: #f3f4f6;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 240px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    background-color: #cbf8e1; /* Verde clarito */
+}
+
+.option-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #10b981; /* Verde bonito */
+}
+
+.option-card h3 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.option-card p {
+    font-size: 0.95rem;
+    color: #475569;
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+
+/* DISEÑO DE MODAL NIS MANUAL */
+
+.modal-content.manual {
+    max-width: 450px;
+    padding: 2rem 2.5rem;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+.input-nis {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 1.5rem;
+    border: 2px solid #10b981;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.input-nis:focus {
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.modal-btn.manual {
+    background-color: #10b981;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-btn.manual:hover {
+    background-color: #059669;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* BOTON DE VOLVER */
+.btn-volver {
+    background-color: transparent;
+    color: #10b981;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.btn-volver:hover {
+    color: #305a4d;
+}
+
+/* MODAL EXCEL */
+.modal-excel {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    font-family: 'Work Sans', sans-serif;
+    z-index: 1000;
+
+}
+
+.modal-contenido-excel {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    width: 420px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#btnVolverExcel {
+    background-color: transparent;
+    color: #10b981;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+#btnVolverExcel:hover {
+    color: #305a4d;
+}
+
+.modal-contenido-excel h2 {
+    font-size: 24px;
+    color: #2c5364;
+    margin-bottom: 10px;
+}
+
+.modal-contenido-excel p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.archivo-input-excel {
+    margin: 0 auto 25px auto;
+    padding: 12px 14px;
+    width: 100%;
+    border: 2px dashed #2c5364;
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+.archivo-input-excel:hover {
+    border-color: #1abc9c;
+}
+
+.botones-excel {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.btn-excel {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.subir-excel {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.subir-excel:hover {
+    background-color: #16a085;
+    transform: scale(1.03);
+}
+
+
