@@ -7,8 +7,16 @@
 
 }
 
+@font-face {
+    font-family: 'Work Sans';
+    src: url('../css/fonts/WorkSans-Regular.ttf') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
 body {
-    font-family: "Work Sans", serif;
+    font-family: 'Work Sans', sans-serif;
     background: #F1F1F1;
     padding-top: 70px;
 }
@@ -228,6 +236,7 @@ body {
     border-radius: 10px;
 }
 
+
 /* Responsivo para pantallas más pequeñas */
 @media (max-width: 770px) {
     .welcome-section {
@@ -235,6 +244,7 @@ body {
         text-align: center;
         padding: 20px;
     }
+
 
     .welcome-container {
         text-align: center;
@@ -250,6 +260,14 @@ body {
 
     .welcome-text h1 {
         font-size: clamp(30px, 6vw, 60px);
+    }
+    .welcome-buttons .btn-gray{
+        padding: 10px;
+        font-size: 17px;
+    }
+    .welcome-text p {
+        font-size: 20px;
+        color: #555;
     }
 }
 

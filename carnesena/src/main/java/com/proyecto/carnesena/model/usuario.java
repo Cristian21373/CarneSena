@@ -54,6 +54,8 @@ public class usuario {
     @JoinColumn(name = "ficha", nullable = true)
     private ficha ficha;
 
+    private boolean verificado;
+
     
     
     @Enumerated(EnumType.STRING)

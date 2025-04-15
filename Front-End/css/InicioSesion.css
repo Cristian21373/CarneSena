@@ -212,14 +212,7 @@ body {
     margin-bottom: 8px;
 }
 
-.input-container input {
-    width: 100%;
-    padding: 15px;
-    font-size: 18px; 
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
+
 
 .input-container input:focus {
     outline: none;
@@ -254,8 +247,10 @@ body {
 @media (max-width: 480px) {
     .login-container {
         width: 90%; 
-        padding: 30px; 
+        padding: 24px; 
     }
+
+
 }
 
 
@@ -336,6 +331,19 @@ body {
     .mobile-back-btn {
         display: block; 
     }
+
+    .input-container input {
+        width: 100%;
+        padding: 15px 30px; 
+        font-size: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    
+
+    
 }
 
 @media only screen and (max-width: 768px) {

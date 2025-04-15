@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/Front-End/css/index.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Inicio</title>
@@ -34,10 +34,12 @@
         <div class="mobile-menu" id="mobile-menu">
             <span class="close-btn" id="close-btn">&times;</span>
             <ul>
-                <li><a href="/Front-End/index.html">Inicio</a></li>
-                <li><a href="/Front-End/html/roles/usuario/verificarNis.html">Verificar NIS</a></li>
-                <li><a href="/Front-End/html/roles/usuario/pasoapaso.html">¿Cómo descargar tu carnet?</a></li>
-                <li><a href="/Front-End/html/login/login.html">Iniciar sesión</a></li>
+                <li><a href="/Front-End/index.html" class="no-historial">Inicio</a></li>
+                <li><a href="/Front-End/html/roles/usuario/verificarNis.html" class="no-historial">Verificar NIS</a>
+                </li>
+                <li><a href="/Front-End/html/roles/usuario/pasoapaso.html" class="no-historial">¿Cómo descargar tu
+                        carnet?</a></li>
+                <li><a href="/Front-End/html/login/login.html" class="no-historial">Iniciar sesión</a></li>
             </ul>
         </div>
     </nav>
@@ -51,8 +53,10 @@
             </div>
 
             <div class="welcome-buttons">
-                <a href="/Front-End/html/roles/usuario/verificarNis.html"><button class="btn-green">Empezar</button></a>
-                <a href="/Front-End/html/roles/usuario/pasoapaso.html"><button class="btn-gray">¿No sabes como generar
+                <a href="/Front-End/html/roles/usuario/verificarNis.html" class="no-historial"><button
+                        class="btn-green">Empezar</button></a>
+                <a href="/Front-End/html/roles/usuario/pasoapaso.html" class="no-historial"><button class="btn-gray">¿No
+                        sabes como generar
                         tu carnet?</button></a>
             </div>
         </div>
@@ -64,5 +68,6 @@
 </body>
 <script src="/Front-End/js/menuMovil.js"></script>
 <script src="/Front-End/js/script.js"></script>
+<script src="/Front-End/js/navegacion.js"></script>
 
 </html>

@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/Front-End/css/panelAdmin.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Control CarneSENA</title>
@@ -72,20 +72,11 @@
                     <th>Fecha fin</th>
                     <th>Estado</th>
                     <th>Opciones</th>
+                    
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>123456</td>
-                    <td>ANALISIS Y DESARROLLO DE SOFTWARE</td>
-                    <td>17/01/2024</td>
-                    <td>18/01/2024</td>
-                    <td>Completado</td>
-                    <td>
-                        <button class="table-btn btn-editar"><i class="fa-solid fa-user-pen"></i></button>
-                        <button class="table-btn btn-eliminar"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                </tr>
+            <tbody id="cuerpoTabla">
+                
             </tbody>
         </table>
 
@@ -95,19 +86,11 @@
 
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/Front-End/js/menuMovil.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const rows = document.querySelectorAll(".crud-table tbody tr");
-
-    rows.forEach(row => {
-        row.addEventListener("click", function () {
-            rows.forEach(r => r.classList.remove("selected"));
-            this.classList.add("selected");
-        });
-    });
-});
-
-</script>
+<script src="/Front-End/js/Seguridad.js"></script>
+<script src="/Front-End/js/jsUrl/Urls.js"></script>
+<script src="/Front-End/js/ficha.js"></script>
 
 </html>

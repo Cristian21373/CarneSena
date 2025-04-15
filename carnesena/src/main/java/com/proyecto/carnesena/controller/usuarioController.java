@@ -32,6 +32,8 @@ import com.proyecto.carnesena.interfaces.Iusuario;
 import com.proyecto.carnesena.model.estado_user;
 import com.proyecto.carnesena.model.usuario;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/api/v1/usuario")
 public class usuarioController {
@@ -103,14 +105,17 @@ public class usuarioController {
     }
 
     @GetMapping("/verificar-nis/{nis}")
-    public ResponseEntity<Object> verificarNis(@PathVariable("nis") int nis) {
-        Optional<usuario> usuarioExistente = usuarioService.findByNis(nis);
+    public ResponseEntity<?> verificarNIS(@PathVariable int nis) {
+        Optional<usuario> usuario = usuarioService.findByNis(nis);
 
-        if (!usuarioExistente.isPresent()) {
-            return new ResponseEntity<>("El NIS no está registrado", HttpStatus.NOT_FOUND);
+        if (!usuario.isPresent()) {
+            return new ResponseEntity<>("NIS no encontrado", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(usuarioExistente.get(), HttpStatus.OK);
+        usuario.get().setVerificado(true);
+        usuarioService.save(usuario.get());
+
+        return new ResponseEntity<>(usuario.get(), HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -147,14 +152,19 @@ public class usuarioController {
 
         usuario usuario = usuarioExistente.get();
 
-        // 🚨 BLOQUEA la edición si el usuario ya está COMPLETADO o DESCARGADO
+        // 🚫 NO permitir si no ha verificado su NIS
+        if (!usuario.isVerificado()) {
+            return new ResponseEntity<>("Debe verificar su NIS antes de completar el formulario", HttpStatus.FORBIDDEN);
+        }
+
+        // 🚫 NO permitir si ya está completado o descargado
         if (usuario.getEstado_user() == estado_user.completo || usuario.getEstado_user() == estado_user.descargado) {
             return new ResponseEntity<>(
                     "No se pueden registrar datos porque el usuario ya está en estado COMPLETADO o DESCARGADO",
                     HttpStatus.FORBIDDEN);
         }
 
-        // ✅ Si no está COMPLETADO, permite actualizar
+        // ✅ Si está verificado y aún no completado, permite actualizar
         usuario.setFoto(usuarioUpdate.getFoto());
         usuario.setNombre(usuarioUpdate.getNombre());
         usuario.setApellidos(usuarioUpdate.getApellidos());
@@ -162,7 +172,7 @@ public class usuarioController {
         usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
         usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
         usuario.setFicha(usuarioUpdate.getFicha());
-        usuario.setEstado_user(estado_user.completo); // Cambia el estado a COMPLETO
+        usuario.setEstado_user(estado_user.completo);
 
         usuarioService.save(usuario);
         return new ResponseEntity<>("Datos de usuario registrados correctamente", HttpStatus.OK);

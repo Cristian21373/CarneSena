@@ -1,8 +1,6 @@
 package com.proyecto.carnesena.model;
 
-
-
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,10 +32,10 @@ public class ficha {
     private int codigo_ficha;
 
     @Column(name = "fecha_inicio", nullable = false)
-    private Date fecha_inicio;
+    private LocalDate fecha_inicio;
 
     @Column(name = "fecha_fin", nullable = false)
-    private Date fecha_fin;
+    private LocalDate fecha_fin;
 
     @Enumerated(EnumType.STRING)
     private estado_ficha estado_ficha;
