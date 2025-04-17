@@ -3,6 +3,7 @@ var Servidor = "http://localhost:8080/api/v1/"
 
 var urlLogin = Servidor + "public/user/login/";
 var urlUsuario = Servidor + "usuario/";
+var urlEliminarUser = Servidor + "usuario/";
 var urlNuevo_usuario = Servidor + "usuario/" + "registrar-nis";
 
 var urlFicha = Servidor + "ficha/"

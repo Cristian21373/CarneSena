@@ -45,4 +45,8 @@ public class fichaService implements IFichaService {
 		return 1;
     }
 
+    public Optional<ficha> findById(String id) {
+        return data.findById(id);
+    }
+
 }

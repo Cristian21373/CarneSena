@@ -36,6 +36,7 @@ function listaUsuario() {
                 var celdaNumero_ficha = document.createElement("td");
                 var celdaNombre_programa = document.createElement("td");
                 var celdaEstado = document.createElement("td");
+                var celdaOpciones = document.createElement("td");
 
                 celdaNIS.innerText = usuario.nis;
                 celdaNombres.innerText = usuario.nombre;
@@ -53,7 +54,43 @@ function listaUsuario() {
                 celdaEstado.innerText = usuario.estado_user;
 
 
+                var botonEliminar = document.createElement("button");
+                botonEliminar.className = "btn-icon eliminar-btn";
+                botonEliminar.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                botonEliminar.onclick = function () {
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¡No podrás revertir esto!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminarlo'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            eliminarUsuario(usuario.id_usuario);
+                        }
+                    });
+                };
 
+                // Botón de Actualizar con ícono
+                var botonActualizarUsuario = document.createElement("button");
+                botonActualizarUsuario.className = "btn-icon editar-btn";
+                botonActualizarUsuario.innerHTML = '<i class="fas fa-edit"></i>';
+                botonActualizarUsuario.onclick = function () {
+                    $('#modal-usuario').modal('show');
+                    consultarUsuarioID(usuario.id_usuario);
+                };
+
+                // Contenedor para los botones
+                var divBotones = document.createElement("div");
+                divBotones.className = "btn-group";
+                divBotones.appendChild(botonEliminar);
+                divBotones.appendChild(botonActualizarUsuario);
+
+
+                // Añadir el contenedor a la celda de acciones
+                celdaOpciones.appendChild(divBotones);
 
                 trRegistro.appendChild(celdaFoto);
                 trRegistro.appendChild(celdaNIS);
@@ -64,6 +101,7 @@ function listaUsuario() {
                 trRegistro.appendChild(celdaNumero_ficha);
                 trRegistro.appendChild(celdaNombre_programa);
                 trRegistro.appendChild(celdaEstado);
+                trRegistro.appendChild(celdaOpciones);
 
                 cuerpoTabla.appendChild(trRegistro);
             });
@@ -78,6 +116,108 @@ function listaUsuario() {
 $(document).ready(function () {
     listaUsuario();
 });
+
+//Eliminar usuario
+function eliminarUsuario(id_usuario) {
+    $.ajax({
+        url: urlEliminarUser + id_usuario,
+        type: "DELETE",
+        success: function (result) {
+            Swal.fire(
+                '¡Eliminado!',
+                'El usuario ha sido eliminado.',
+                'success'
+            );
+            listaUsuario();
+        }
+    });
+}
+
+
+//Esta funcion llenara el modal con los datos del usuario seleccionado
+function consultarUsuarioID(id_usuario) {
+    cargarListaFicha();
+
+    $.ajax({
+        url: urlUsuario + id_usuario,
+        type: 'GET',
+        success: function (usuario) {
+            $('#inputIdUsuario').val(usuario.id_usuario);
+            $('#inputNIS').val(usuario.nis);
+            $('#inputNombre').val(usuario.nombre);
+            $('#inputApellidos').val(usuario.apellidos);
+            $('#inputTipoSangre').val(usuario.tipo_sangre);
+            $('#inputTipoDocumento').val(usuario.tipo_documento);
+            $('#inputNumeroDocumento').val(usuario.numero_documento);
+            $('#inputEstado').val(usuario.estado_user);
+            $('#inputFicha').val(usuario.ficha.id_ficha); 
+
+            if (usuario.foto) {
+                $('#previewFoto').attr('src', usuario.foto).show();
+            }
+
+            $('#modal-usuario').modal('show');
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo obtener la información del usuario',
+                confirmButtonColor: '#ef4444'
+            });
+        }
+    });
+}
+
+
+
+
+function actualizarUsuario(id_usuario) {
+    const url = "http://localhost:8080/api/v1/usuario/editar/";
+
+    var datos = {
+        id_usuario: id_usuario,
+        nis: $('#inputNIS').val(),
+        nombre: $('#inputNombre').val(),
+        apellidos: $('#inputApellidos').val(),
+        tipo_sangre: $('#inputTipoSangre').val(),
+        tipo_documento: $('#inputTipoDocumento').val(),
+        numero_documento: $('#inputNumeroDocumento').val(),
+        ficha: {
+            id_ficha: $('#inputFicha').val()
+        },
+        estado_user: $('#inputEstado').val(),
+        foto: $('#inputFoto').val()
+    };
+
+    $.ajax({
+        url: url + id_usuario + "?ADMIN=true",
+        type: "PUT",
+        data: JSON.stringify(datos),
+        contentType: "application/json",
+        success: function (result) {
+            $('#modal-usuario').modal('hide');
+            Swal.fire('¡Actualizado!', 'Los datos del usuario han sido actualizados.', 'success');
+            listaUsuario();
+        },
+        error: function (xhr, status, error) {
+            Swal.fire('Error', 'No se pudo actualizar el usuario. ' + error, 'error');
+        }
+    });
+}
+
+
+
+$(document).ready(function () {
+    $('#formEditarUsuario').submit(function (e) {
+        e.preventDefault();
+        const id_usuario = $('#inputIdUsuario').val();
+        actualizarUsuario(id_usuario);
+    });
+});
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const modalAgregarNis = document.getElementById('modalAgregarNis');
@@ -149,7 +289,7 @@ $(document).ready(function () {
                 }).then(() => {
                     $('#modalManualNis').hide();
                     $('#nisInput').val('');
-                    listaUsuario(); 
+                    listaUsuario();
                 });
             },
             error: function (xhr) {
@@ -217,7 +357,7 @@ $(document).ready(function () {
                 }).then(() => {
                     $('#modalExcel').hide();
                     $('#archivoExcel').val('');
-                    listaUsuario(); 
+                    listaUsuario();
                 });
             },
             error: function (xhr) {
@@ -231,3 +371,34 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+
+
+// Función para cargar la lista de usuarios
+function cargarListaFicha() {
+    var ficha = document.getElementById("inputFicha");
+
+    if (ficha) {
+        ficha.innerHTML = "";
+
+        $.ajax({
+            url: urlFicha,
+            type: "GET",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = result[i].id_ficha;
+                    option.text = result[i].nombre_programa + " - " + result[i].codigo_ficha;
+                    ficha.appendChild(option);
+                }
+            },
+            error: function (error) {
+                console.error("Error al obtener la lista de la ficha: " + error);
+            }
+        });
+    } else {
+        console.error("Elemento con ID 'ficha' no encontrado.");
+    }
+}

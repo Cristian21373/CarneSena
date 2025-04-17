@@ -792,3 +792,221 @@ body {
 }
 
 
+#modal-usuario .modal-content {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    max-height: 90vh; 
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+/* Estilo del botón de cerrar */
+#modal-usuario .btn-close {
+    margin-right: 10px; 
+    background: transparent; 
+    border: none; 
+    color: #333;
+    font-size: 20px;
+}
+
+#modal-usuario label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#modal-usuario .form-control {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+#modal-usuario .form-control:focus {
+    border-color: #65C472;
+    box-shadow: none;
+}
+
+#modal-usuario .modal-footer .btn {
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Botón cancelar */
+#modal-usuario .btn-secondary {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+}
+
+#modal-usuario .btn-secondary:hover {
+    background-color: #999;
+    transform: scale(1.05);
+}
+
+/* Botón guardar */
+#modal-usuario .btn-success {
+    background-color: #65C472;
+    color: white;
+    border: none;
+}
+
+#modal-usuario .btn-success:hover {
+    background-color: #4e9758;
+    transform: scale(1.05);
+}
+
+/* Vista previa de la foto */
+#previewFoto {
+    display: none;
+    margin-top: 10px;
+    max-height: 130px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    object-fit: cover;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#modal-usuario .modal-dialog {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    margin: 0;
+}
+
+/* Para pantallas pequeñas, ajustamos para que no se corte el modal */
+@media (max-width: 768px) {
+    #modal-usuario .modal-content::-webkit-scrollbar {
+        width: 0px;
+    }
+    
+}
+
+#modal-usuario .modal-content {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+
+/* Aseguramos que el formulario este centrado dentro del modal */
+#formEditarUsuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Espacio entre los campos del formulario */
+.form-group {
+    margin-bottom: 15px; /* Espacio entre los campos */
+    width: 100%;
+}
+
+/* Aseguramos que los inputs ocupen todo el ancho disponible */
+.form-control {
+    width: 100%;
+}
+
+/* Ajustes adicionales para asegurar que el modal y el formulario se vean bien en pantallas pequeñas */
+@media (max-width: 768px) {
+    .modal-dialog {
+        width: 100%;
+        margin: 0;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 10px; 
+    }
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* Título del modal */
+#modal-usuario .modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10px; 
+    text-align: center;
+}
+
+#modal-usuario .close-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer; 
+    margin-left: 10px; 
+}
+
+
+#modal-usuario .close-text:hover {
+    color: #e74c3c;
+}
+
+
+
+.btn-icon {
+    border: none;
+    padding: 8px;
+    margin: 0 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+
+.editar-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.editar-btn:hover {
+    background-color: #e0a800;
+}
+
+.eliminar-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.eliminar-btn:hover {
+    background-color: #c82333;
+}
+
+.btn-icon i {
+    pointer-events: none;
+}

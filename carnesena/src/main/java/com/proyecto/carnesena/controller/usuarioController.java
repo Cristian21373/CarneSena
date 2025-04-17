@@ -30,9 +30,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.carnesena.interfaces.Iusuario;
 import com.proyecto.carnesena.model.estado_user;
+import com.proyecto.carnesena.model.ficha;
 import com.proyecto.carnesena.model.usuario;
-
-import jakarta.servlet.http.HttpSession;
+import com.proyecto.carnesena.service.fichaService;
 
 @RestController
 @RequestMapping("/api/v1/usuario")
@@ -41,6 +41,10 @@ public class usuarioController {
     @Autowired
     private Iusuario usuarioService;
     private static final String UPLOAD_DIR = "uploads/";
+
+
+    @Autowired
+    private fichaService fichaService;
 
     @PostMapping("/registrar-nis")
     public ResponseEntity<Object> registrarNis(@RequestBody usuario usuario) {
@@ -152,19 +156,19 @@ public class usuarioController {
 
         usuario usuario = usuarioExistente.get();
 
-        // 🚫 NO permitir si no ha verificado su NIS
+        // NO permitir si no ha verificado su NIS
         if (!usuario.isVerificado()) {
             return new ResponseEntity<>("Debe verificar su NIS antes de completar el formulario", HttpStatus.FORBIDDEN);
         }
 
-        // 🚫 NO permitir si ya está completado o descargado
+        // NO permitir si ya está completado o descargado
         if (usuario.getEstado_user() == estado_user.completo || usuario.getEstado_user() == estado_user.descargado) {
             return new ResponseEntity<>(
                     "No se pueden registrar datos porque el usuario ya está en estado COMPLETADO o DESCARGADO",
                     HttpStatus.FORBIDDEN);
         }
 
-        // ✅ Si está verificado y aún no completado, permite actualizar
+        // Si está verificado y aún no completado, permite actualizar
         usuario.setFoto(usuarioUpdate.getFoto());
         usuario.setNombre(usuarioUpdate.getNombre());
         usuario.setApellidos(usuarioUpdate.getApellidos());
@@ -181,7 +185,8 @@ public class usuarioController {
     @PutMapping("/editar/{id_usuario}")
     public ResponseEntity<Object> editarUsuario(@PathVariable("id_usuario") String id,
             @RequestBody usuario usuarioUpdate,
-            @RequestParam(value = "admin", required = false, defaultValue = "false") boolean admin) {
+            @RequestParam(value = "ADMIN", required = false, defaultValue = "false") boolean ADMIN) {
+
         Optional<usuario> usuarioExistente = usuarioService.findById(id);
 
         if (!usuarioExistente.isPresent()) {
@@ -190,7 +195,7 @@ public class usuarioController {
 
         usuario usuario = usuarioExistente.get();
 
-        if (!admin && usuario.getEstado_user() == estado_user.completo) {
+        if (!ADMIN && usuario.getEstado_user() == estado_user.completo) {
             return new ResponseEntity<>("No se puede editar un usuario en estado COMPLETO", HttpStatus.FORBIDDEN);
         }
 
@@ -200,17 +205,19 @@ public class usuarioController {
         usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
         usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
         usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
-        usuario.setFicha(usuarioUpdate.getFicha());
+        usuario.setEstado_user(usuarioUpdate.getEstado_user());
 
-        if (admin) {
-            usuario.setEstado_user(usuarioUpdate.getEstado_user());
-        } else {
-            usuario.setEstado_user(estado_user.actualizacion);
+        if (usuarioUpdate.getFicha() != null && usuarioUpdate.getFicha().getId_ficha() != null) {
+            Optional<ficha> fichaNueva = fichaService.findById(usuarioUpdate.getFicha().getId_ficha());
+            fichaNueva.ifPresent(usuario::setFicha);
         }
 
         usuarioService.save(usuario);
         return new ResponseEntity<>("Datos de usuario actualizados correctamente", HttpStatus.OK);
     }
+
+
+
 
     @PostMapping("/carga-masiva-nis")
     public ResponseEntity<Object> cargaMasivaNis(@RequestParam("file") MultipartFile file) {
@@ -234,7 +241,7 @@ public class usuarioController {
                 Optional<usuario> usuarioExistente = usuarioService.findByNis(nis);
 
                 if (usuarioExistente.isPresent()) {
-                    nisDuplicados.add(nis); // NIS ya existe, no lo guardamos
+                    nisDuplicados.add(nis); // Si el NIS ya existe, no lo guardamos
                 } else {
                     usuario nuevoUsuario = new usuario();
                     nuevoUsuario.setNis(nis);
