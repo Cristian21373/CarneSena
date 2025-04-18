@@ -18,9 +18,11 @@ function listaUsuario() {
                 var celdaFoto = document.createElement("td");
                 var img = document.createElement("img");
                 if (usuario.foto) {
-                    img.src = usuario.foto;
-                } else {
-                    img.src = "/Front-End/img/default.png";
+                    if (!usuario.foto.startsWith("http")) {
+                        img.src = "http://localhost:8080/" + usuario.foto;
+                    } else {
+                        img.src = usuario.foto;
+                    }
                 }
                 img.alt = "Foto";
                 img.style.width = "24px";
@@ -143,6 +145,11 @@ function consultarUsuarioID(id_usuario) {
         type: 'GET',
         success: function (usuario) {
             $('#inputIdUsuario').val(usuario.id_usuario);
+            if (usuario.foto) {
+                let rutaFoto = usuario.foto.startsWith("http") ? usuario.foto : `http://localhost:8080/${usuario.foto}`;
+                $('#previewFoto').attr('src', rutaFoto).show();
+            }
+
             $('#inputNIS').val(usuario.nis);
             $('#inputNombre').val(usuario.nombre);
             $('#inputApellidos').val(usuario.apellidos);
@@ -150,11 +157,12 @@ function consultarUsuarioID(id_usuario) {
             $('#inputTipoDocumento').val(usuario.tipo_documento);
             $('#inputNumeroDocumento').val(usuario.numero_documento);
             $('#inputEstado').val(usuario.estado_user);
-            $('#inputFicha').val(usuario.ficha.id_ficha); 
-
-            if (usuario.foto) {
-                $('#previewFoto').attr('src', usuario.foto).show();
+            if (usuario.estado_user === 'creado') {
+                $('#inputEstado option[value="creado"]').show();
             }
+            $('#inputFicha').val(usuario.ficha.id_ficha);
+
+
 
             $('#modal-usuario').modal('show');
         },
@@ -170,32 +178,34 @@ function consultarUsuarioID(id_usuario) {
 }
 
 
-
-
 function actualizarUsuario(id_usuario) {
-    const url = "http://localhost:8080/api/v1/usuario/editar/";
+    let formData = new FormData();
 
-    var datos = {
-        id_usuario: id_usuario,
-        nis: $('#inputNIS').val(),
-        nombre: $('#inputNombre').val(),
-        apellidos: $('#inputApellidos').val(),
-        tipo_sangre: $('#inputTipoSangre').val(),
-        tipo_documento: $('#inputTipoDocumento').val(),
-        numero_documento: $('#inputNumeroDocumento').val(),
-        ficha: {
-            id_ficha: $('#inputFicha').val()
-        },
-        estado_user: $('#inputEstado').val(),
-        foto: $('#inputFoto').val()
-    };
+    // Añadir imagen solo si el usuario seleccionó una nueva
+    const archivoFoto = $('#inputFoto')[0].files[0];
+    if (archivoFoto) {
+        formData.append("file", archivoFoto);
+    }
+
+    // Agregar los demás campos
+    formData.append("id_usuario", id_usuario);
+    formData.append("nis", $('#inputNIS').val());
+    formData.append("nombre", $('#inputNombre').val());
+    formData.append("apellidos", $('#inputApellidos').val());
+    formData.append("tipo_sangre", $('#inputTipoSangre').val());
+    formData.append("tipo_documento", $('#inputTipoDocumento').val());
+    formData.append("numero_documento", $('#inputNumeroDocumento').val());
+    formData.append("estado_user", $('#inputEstado').val());
+    formData.append("id_ficha", $('#inputFicha').val());
+
 
     $.ajax({
-        url: url + id_usuario + "?ADMIN=true",
-        type: "PUT",
-        data: JSON.stringify(datos),
-        contentType: "application/json",
-        success: function (result) {
+        url: urlEditar_usuario + id_usuario + "?ADMIN=true",
+        type: "PUT", 
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function (response) {
             $('#modal-usuario').modal('hide');
             Swal.fire('¡Actualizado!', 'Los datos del usuario han sido actualizados.', 'success');
             listaUsuario();
@@ -208,6 +218,7 @@ function actualizarUsuario(id_usuario) {
 
 
 
+
 $(document).ready(function () {
     $('#formEditarUsuario').submit(function (e) {
         e.preventDefault();
@@ -215,6 +226,22 @@ $(document).ready(function () {
         actualizarUsuario(id_usuario);
     });
 });
+
+
+$('#inputFoto').on('change', function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#previewFoto').attr('src', e.target.result).show();
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+
+
 
 
 
@@ -225,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const cerrarModalNis = document.getElementById('cerrarModalNis');
     const opcionManual = document.getElementById('opcionManual');
     const modalManualNis = document.getElementById('modalManualNis');
-    const cerrarModalManual = document.getElementById('cerrarModalManual');
 
     // Abrir el primer modal
     btnAbrirModalNis.addEventListener('click', function () {
@@ -340,7 +366,7 @@ $(document).ready(function () {
         formData.append('file', archivo);
 
         $.ajax({
-            url: 'http://localhost:8080/api/v1/usuario/carga-masiva-nis',
+            url: urlCargaExcel,
             method: 'POST',
             data: formData,
             processData: false,

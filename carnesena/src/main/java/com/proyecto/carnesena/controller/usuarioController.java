@@ -16,6 +16,7 @@ import java.util.Map;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.proyecto.carnesena.interfaces.Iusuario;
 import com.proyecto.carnesena.model.estado_user;
 import com.proyecto.carnesena.model.ficha;
+import com.proyecto.carnesena.model.tipo_documento;
 import com.proyecto.carnesena.model.usuario;
 import com.proyecto.carnesena.service.fichaService;
 
@@ -42,28 +44,33 @@ public class usuarioController {
     private Iusuario usuarioService;
     private static final String UPLOAD_DIR = "uploads/";
 
-
     @Autowired
     private fichaService fichaService;
 
     @PostMapping("/registrar-nis")
-    public ResponseEntity<Object> registrarNis(@RequestBody usuario usuario) {
-        if (usuario.getNis() == 0) {
-            return new ResponseEntity<>("El NIS es obligatorio", HttpStatus.BAD_REQUEST);
-        }
-
-        Optional<usuario> usuarioExistente = usuarioService.findByNis(usuario.getNis());
-        if (usuarioExistente.isPresent()) {
-            return new ResponseEntity<>("El NIS ya está registrado", HttpStatus.BAD_REQUEST);
-        }
-
-        usuario nuevoUsuario = new usuario();
-        nuevoUsuario.setNis(usuario.getNis());
-        nuevoUsuario.setEstado_user(estado_user.creado);
-        usuarioService.save(nuevoUsuario);
-
-        return new ResponseEntity<>("NIS registrado correctamente", HttpStatus.OK);
+public ResponseEntity<Object> registrarNis(@RequestBody usuario usuario) {
+    if (usuario.getNis() == 0) {
+        return new ResponseEntity<>("El NIS es obligatorio", HttpStatus.BAD_REQUEST);
     }
+
+    Optional<usuario> usuarioExistente = usuarioService.findByNis(usuario.getNis());
+    if (usuarioExistente.isPresent()) {
+        return new ResponseEntity<>("El NIS ya está registrado", HttpStatus.BAD_REQUEST);
+    }
+
+    usuario nuevoUsuario = new usuario();
+    nuevoUsuario.setNis(usuario.getNis());
+    nuevoUsuario.setEstado_user(estado_user.creado);
+
+    nuevoUsuario.setTipo_documento(tipo_documento.CC);
+    nuevoUsuario.setNumero_documento(0);
+    nuevoUsuario.setTipo_sangre("A+");
+
+    usuarioService.save(nuevoUsuario);
+
+    return new ResponseEntity<>("NIS registrado correctamente", HttpStatus.OK);
+}
+
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
@@ -169,6 +176,7 @@ public class usuarioController {
         }
 
         // Si está verificado y aún no completado, permite actualizar
+        usuario.setNis(usuarioUpdate.getNis());
         usuario.setFoto(usuarioUpdate.getFoto());
         usuario.setNombre(usuarioUpdate.getNombre());
         usuario.setApellidos(usuarioUpdate.getApellidos());
@@ -182,42 +190,113 @@ public class usuarioController {
         return new ResponseEntity<>("Datos de usuario registrados correctamente", HttpStatus.OK);
     }
 
-    @PutMapping("/editar/{id_usuario}")
-    public ResponseEntity<Object> editarUsuario(@PathVariable("id_usuario") String id,
-            @RequestBody usuario usuarioUpdate,
+    // @PutMapping("/editar/{id_usuario}")
+    // public ResponseEntity<Object> editarUsuario(@PathVariable("id_usuario")
+    // String id,
+    // @RequestBody usuario usuarioUpdate,
+    // @RequestParam(value = "ADMIN", required = false, defaultValue = "false")
+    // boolean ADMIN) {
+
+    // Optional<usuario> usuarioExistente = usuarioService.findById(id);
+
+    // if (!usuarioExistente.isPresent()) {
+    // return new ResponseEntity<>("El usuario con ese ID no existe",
+    // HttpStatus.NOT_FOUND);
+    // }
+
+    // usuario usuario = usuarioExistente.get();
+
+    // if (!ADMIN && usuario.getEstado_user() == estado_user.completo) {
+    // return new ResponseEntity<>("No se puede editar un usuario en estado
+    // COMPLETO", HttpStatus.FORBIDDEN);
+    // }
+
+    // usuario.setFoto(usuarioUpdate.getFoto());
+    // usuario.setNombre(usuarioUpdate.getNombre());
+    // usuario.setApellidos(usuarioUpdate.getApellidos());
+    // usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
+    // usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
+    // usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
+    // usuario.setEstado_user(usuarioUpdate.getEstado_user());
+
+    // if (usuarioUpdate.getFicha() != null &&
+    // usuarioUpdate.getFicha().getId_ficha() != null) {
+    // Optional<ficha> fichaNueva =
+    // fichaService.findById(usuarioUpdate.getFicha().getId_ficha());
+    // fichaNueva.ifPresent(usuario::setFicha);
+    // }
+
+    // usuarioService.save(usuario);
+    // return new ResponseEntity<>("Datos de usuario actualizados correctamente",
+    // HttpStatus.OK);
+    // }
+
+
+
+    @PutMapping(value = "/editar/{id_usuario}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Object> editarUsuario(
+            @PathVariable("id_usuario") String id,
+            @RequestParam("nis") Integer nis,
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("apellidos") String apellidos,
+            @RequestParam("tipo_documento") String tipoDocStr,
+            @RequestParam("numero_documento") String numero_documento,
+            @RequestParam("tipo_sangre") String tipo_sangre,
+            @RequestParam("estado_user") String estadoStr,
+            @RequestParam("id_ficha") String id_ficha,
             @RequestParam(value = "ADMIN", required = false, defaultValue = "false") boolean ADMIN) {
-
+    
         Optional<usuario> usuarioExistente = usuarioService.findById(id);
-
+    
         if (!usuarioExistente.isPresent()) {
-            return new ResponseEntity<>("El usuario con ese ID no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
         }
-
+    
         usuario usuario = usuarioExistente.get();
-
+    
         if (!ADMIN && usuario.getEstado_user() == estado_user.completo) {
             return new ResponseEntity<>("No se puede editar un usuario en estado COMPLETO", HttpStatus.FORBIDDEN);
         }
+    
+        // Esto es para saber si la imagen se envia correctamente o si hubo un error
+        if (file != null && !file.isEmpty()) {
+            String nombreArchivo = file.getOriginalFilename();
+            Path ruta = Paths.get("uploads/" + nombreArchivo);
+            try {
+                Files.write(ruta, file.getBytes());
+                usuario.setFoto(ruta.toString());
+            } catch (IOException e) {
+                return new ResponseEntity<>("Error al guardar la imagen", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+    
+        // Actualizar datos
+        usuario.setNombre(nombre);
+        usuario.setApellidos(apellidos);
+        usuario.setNis(nis);
+    
 
-        usuario.setFoto(usuarioUpdate.getFoto());
-        usuario.setNombre(usuarioUpdate.getNombre());
-        usuario.setApellidos(usuarioUpdate.getApellidos());
-        usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
-        usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
-        usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
-        usuario.setEstado_user(usuarioUpdate.getEstado_user());
-
-        if (usuarioUpdate.getFicha() != null && usuarioUpdate.getFicha().getId_ficha() != null) {
-            Optional<ficha> fichaNueva = fichaService.findById(usuarioUpdate.getFicha().getId_ficha());
+        usuario.setTipo_documento(tipo_documento.valueOf(tipoDocStr));
+        usuario.setEstado_user(estado_user.valueOf(estadoStr));
+    
+        try {
+            usuario.setNumero_documento(Integer.parseInt(numero_documento));
+        } catch (NumberFormatException e) {
+            return new ResponseEntity<>("Número de documento inválido", HttpStatus.BAD_REQUEST);
+        }
+    
+        usuario.setTipo_sangre(tipo_sangre);
+    
+        if (id_ficha != null && !id_ficha.isBlank()) {
+            Optional<ficha> fichaNueva = fichaService.findById(id_ficha);
             fichaNueva.ifPresent(usuario::setFicha);
         }
-
+    
         usuarioService.save(usuario);
         return new ResponseEntity<>("Datos de usuario actualizados correctamente", HttpStatus.OK);
     }
-
-
-
+    
 
     @PostMapping("/carga-masiva-nis")
     public ResponseEntity<Object> cargaMasivaNis(@RequestParam("file") MultipartFile file) {

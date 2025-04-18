@@ -5,5 +5,9 @@ var urlLogin = Servidor + "public/user/login/";
 var urlUsuario = Servidor + "usuario/";
 var urlEliminarUser = Servidor + "usuario/";
 var urlNuevo_usuario = Servidor + "usuario/" + "registrar-nis";
+var urlCargaExcel = Servidor + "usuario" + "/carga-masiva-nis";
+var urlEditar_usuario = Servidor +"usuario/" + "editar/"; 
+
 
 var urlFicha = Servidor + "ficha/"
+var urlEliminarFicha = Servidor + "ficha/"

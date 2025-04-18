@@ -55,7 +55,7 @@
         <div class="top-bar">
             <div class="title-container">
                 <h2 class="page-title">Crear ficha</h2>
-                <button class="new-ficha">Agregar Ficha</button>
+                <button class="btnAbrirModalFicha">Agregar Ficha</button>
             </div>
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Buscar...">
@@ -71,20 +71,30 @@
                     <th>Fecha inicio</th>
                     <th>Fecha fin</th>
                     <th>Estado</th>
-                    <th>Opciones</th>
-                    
+                    <th id="headerAcciones">Opciones</th>
+
                 </tr>
             </thead>
             <tbody id="cuerpoTabla">
-                
+
             </tbody>
         </table>
-
-
-
-
-
     </div>
+
+    <!-- MODAL AGREGAR NIS -->
+    <div id="modalAgregarFicha" class="modal">
+        <div class="modal-content modern-nis">
+            <span class="close-btn" id="cerrarModalFicha">&times;</span>
+            <h2 class="modal-title">Agregar ficha</h2>
+            <input type="text" id="numeroInput" placeholder="Ingrese numero de la ficha" class="input-nis">
+            <input type="text" id="nombreInput" placeholder="Ingresa el nombre del programa" class="input-nis">
+            <input type="datetime-local" id="fechaInicioInput" placeholder="Ingresa la fecha de inicio" class="input-nis">
+            <input type="datetime-local" id="fechaFinInput" placeholder="Ingresa la fecha de fin" class="input-nis">
+            <button id="registrarNisBtn" class="modal-btn manual">Registrar NIS</button>
+        </div>
+    </div>
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
