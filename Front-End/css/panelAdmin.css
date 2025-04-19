@@ -429,18 +429,6 @@ body {
 }
 
 
-.new-nis {
-    background: #65c472;
-    border: none;
-    color: white;
-    padding: 12px;
-    border-radius: 6px;
-    height: 46px;
-    width: 139px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
 .title-container {
     display: flex;
     align-items: center;

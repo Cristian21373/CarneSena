@@ -14,7 +14,7 @@ public interface IUsuarioService {
 
     public int delete(String id);
 
-    public List<usuario> filtroUsuario(String nombre);
+    public List<usuario> filtroUsuario(String filtro);
 
     public Optional<usuario> findByNis(int nis);
 

@@ -142,3 +142,25 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$(document).ready(function () {
+    $(".mobile-menu li a:contains('Cerrar sesión')").click(function (e) {
+        e.preventDefault(); // Evita la recarga de la página
+
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Se cerrará tu sesión y deberás volver a iniciar sesión.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, cerrar sesión",
+            cancelButtonText: "Cancelar",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("token"); // Eliminar el token
+                window.location.href = "/Front-End/html/login/login.html"; // Redirigir al login
+            }
+        });
+    });
+});

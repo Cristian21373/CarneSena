@@ -1,11 +1,13 @@
 function listaUsuario() {
     var capturarFiltro = document.querySelector(".search-input").value;
+    var url = urlUsuario; // esta es una copia local
+
     if (capturarFiltro !== "") {
-        urlUsuario += "busquedafiltro/" + capturarFiltro;
+        url += "busquedafiltro/" + capturarFiltro;
     }
 
     $.ajax({
-        url: urlUsuario,
+        url: url,
         type: "GET",
         success: function (result) {
             var cuerpoTabla = document.getElementById("cuerpoTabla");
@@ -136,6 +138,38 @@ function eliminarUsuario(id_usuario) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const modalAgregarNis = document.getElementById('modalAgregarNis');
+    const btnAbrirModalNis = document.getElementById('btnAbrirModalNis');
+    const cerrarModalNis = document.getElementById('cerrarModalNis');
+    const opcionManual = document.getElementById('opcionManual');
+    const modalManualNis = document.getElementById('modalManualNis');
+
+    // Abrir el primer modal
+    btnAbrirModalNis.addEventListener('click', function () {
+        modalAgregarNis.style.display = 'flex';
+    });
+
+    // Cerrar el modal de selección
+    cerrarModalNis.addEventListener('click', function () {
+        modalAgregarNis.style.display = 'none';
+    });
+
+    // Abrir el modal manual
+    opcionManual.addEventListener('click', function () {
+        modalAgregarNis.style.display = 'none';
+        modalManualNis.style.display = 'flex';
+    });
+
+});
+
+document.getElementById('btnVolver').addEventListener('click', () => {
+    document.getElementById('modalManualNis').style.display = 'none';
+    document.getElementById('modalAgregarNis').style.display = 'flex';
+});
+
+
+
 //Esta funcion llenara el modal con los datos del usuario seleccionado
 function consultarUsuarioID(id_usuario) {
     cargarListaFicha();
@@ -246,35 +280,6 @@ $('#inputFoto').on('change', function () {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const modalAgregarNis = document.getElementById('modalAgregarNis');
-    const btnAbrirModalNis = document.getElementById('btnAbrirModalNis');
-    const cerrarModalNis = document.getElementById('cerrarModalNis');
-    const opcionManual = document.getElementById('opcionManual');
-    const modalManualNis = document.getElementById('modalManualNis');
-
-    // Abrir el primer modal
-    btnAbrirModalNis.addEventListener('click', function () {
-        modalAgregarNis.style.display = 'flex';
-    });
-
-    // Cerrar el modal de selección
-    cerrarModalNis.addEventListener('click', function () {
-        modalAgregarNis.style.display = 'none';
-    });
-
-    // Abrir el modal manual
-    opcionManual.addEventListener('click', function () {
-        modalAgregarNis.style.display = 'none';
-        modalManualNis.style.display = 'flex';
-    });
-
-});
-
-document.getElementById('btnVolver').addEventListener('click', () => {
-    document.getElementById('modalManualNis').style.display = 'none';
-    document.getElementById('modalAgregarNis').style.display = 'flex';
-});
 
 
 $(document).ready(function () {
@@ -399,8 +404,9 @@ $(document).ready(function () {
 });
 
 
-
-
+document.addEventListener("DOMContentLoaded", function () {
+    cargarListaFicha();
+});
 
 // Función para cargar la lista de usuarios
 function cargarListaFicha() {

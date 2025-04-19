@@ -41,8 +41,8 @@ public class usuarioService implements IUsuarioService {
     }
 
     @Override
-    public List<usuario> filtroUsuario(String nombre) {
-        List<usuario> ListUsuario = data.filtroUsuario(nombre);
+    public List<usuario> filtroUsuario(String filtro) {
+        List<usuario> ListUsuario = data.filtroUsuario(filtro);
         return ListUsuario;
     }
 

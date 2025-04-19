@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/Front-End/css/panelAdmin.css">
+    <link rel="stylesheet" href="/Front-End/css/panelFicha.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Control CarneSENA</title>
 </head>
@@ -55,11 +56,11 @@
         <div class="top-bar">
             <div class="title-container">
                 <h2 class="page-title">Crear ficha</h2>
-                <button class="btnAbrirModalFicha">Agregar Ficha</button>
+                <button id="btnAbrirModalFicha" class="btnAbrirModalFicha">Agregar Ficha</button>
             </div>
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Buscar...">
-                <button class="search-btn">Buscar</button>
+                <button class="search-btn" onclick="listaFicha()">Buscar</button>
             </div>
         </div>
 
@@ -81,19 +82,71 @@
         </table>
     </div>
 
-    <!-- MODAL AGREGAR NIS -->
+    <!-- MODAL AGREGAR FICHA -->
     <div id="modalAgregarFicha" class="modal">
         <div class="modal-content modern-nis">
             <span class="close-btn" id="cerrarModalFicha">&times;</span>
             <h2 class="modal-title">Agregar ficha</h2>
             <input type="text" id="numeroInput" placeholder="Ingrese numero de la ficha" class="input-nis">
             <input type="text" id="nombreInput" placeholder="Ingresa el nombre del programa" class="input-nis">
-            <input type="datetime-local" id="fechaInicioInput" placeholder="Ingresa la fecha de inicio" class="input-nis">
-            <input type="datetime-local" id="fechaFinInput" placeholder="Ingresa la fecha de fin" class="input-nis">
-            <button id="registrarNisBtn" class="modal-btn manual">Registrar NIS</button>
+            <input type="date" id="fechaInicioInput" placeholder="Ingresa la fecha de inicio" class="input-nis">
+            <input type="date" id="fechaFinInput" placeholder="Ingresa la fecha de fin" class="input-nis">
+            <button class="modal-btn manual" onclick="registrarFicha()">Registrar NIS</button>
         </div>
     </div>
 
+
+     <!-- Modal HTML -->
+     <div class="modal fade" id="modal-Ficha" tabindex="-1" aria-labelledby="modalFichaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close-text" data-bs-dismiss="modal" aria-label="Cerrar">&#10005; Cerrar</span>
+                    <h5 class="modal-title" id="modalFichaLabel">Editar Ficha</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarFicha">
+                        <input type="hidden" id="inputIdFicha">
+
+                        <div class="d-flex">
+                            <div class="form-group mr-3">
+                                <label for="inputCodigo">Codigo porgrama</label>
+                                <input type="number" class="form-control" id="inputCodigo">
+                            </div>
+                            <div class="form-group mr-3">
+                                <label for="inputNombre">Nombre programa</label>
+                                <input type="text" class="form-control" id="inputNombre">
+                            </div>
+
+                            <div class="form-group mr-3">
+                                <label for="inputFecha_inicio">Fecha inicio</label>
+                                <input type="date" class="form-control" id="inputFecha_inicio">
+                            </div>
+
+                        
+                            <div class="form-group mr-3">
+                                <label for="inputFecha_fin">Fecha fin</label>
+                                <input type="date" class="form-control" id="inputFecha_fin">
+                            </div>
+
+                            <select class="form-control" id="inputEstado">
+                                <option value="habilitado">Habilitado</option>
+                                <option value="deshabilitado">Deshabilitado</option>
+                            </select>
+
+                        </div>
+
+                        <div class="modal-footer mt-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -102,5 +155,6 @@
 <script src="/Front-End/js/Seguridad.js"></script>
 <script src="/Front-End/js/jsUrl/Urls.js"></script>
 <script src="/Front-End/js/ficha.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
