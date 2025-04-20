@@ -28,8 +28,10 @@
                     Carne</a></li>
             <li><a href="/Front-End/html/roles/administrador/panelFicha.html"><i class="fa-solid fa-circle-plus"></i>
                     Crear ficha</a></li>
-            <li><a href="#"><i class="fa-solid fa-user-tie"></i> Nuevo administrador</a></li>
-            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+            <li id="btnNuevoAdmin"><a href="/Front-End/html/roles/administrador/nuevoAdmin.html"><i class="fa-solid fa-user-tie"></i> Nuevo administrador</a></li>
+            <li class="Cambiar"><a href="#"><i class="fa-solid fa-key"></i> Cambiar contraseña</a></li>
+            <li class="cerrar"><a href="#" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+            </li>
         </ul>
     </div>
 
@@ -48,7 +50,7 @@
                 <ul>
                     <li><a href="/Front-End/html/roles/administrador/panelCarnet.html">Carne</a></li>
                     <li><a href="/Front-End/html/roles/administrador/panelFicha.html">Crear ficha</a></li>
-                    <li><a href="#">Nuevo administrador</a></li>
+                    <li id="btnNuevoAdmin"><a href="/Front-End/html/roles/administrador/nuevoAdmin.html">Nuevo administrador</a></li>
                     <li><a href="#">Cerrar sesion</a></li>
                 </ul>
             </div>
@@ -96,8 +98,8 @@
     </div>
 
 
-     <!-- Modal HTML -->
-     <div class="modal fade" id="modal-Ficha" tabindex="-1" aria-labelledby="modalFichaLabel" aria-hidden="true">
+    <!-- Modal HTML -->
+    <div class="modal fade" id="modal-Ficha" tabindex="-1" aria-labelledby="modalFichaLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -123,7 +125,7 @@
                                 <input type="date" class="form-control" id="inputFecha_inicio">
                             </div>
 
-                        
+
                             <div class="form-group mr-3">
                                 <label for="inputFecha_fin">Fecha fin</label>
                                 <input type="date" class="form-control" id="inputFecha_fin">
@@ -156,5 +158,4 @@
 <script src="/Front-End/js/jsUrl/Urls.js"></script>
 <script src="/Front-End/js/ficha.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </html>

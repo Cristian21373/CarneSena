@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.proyecto.carnesena.model.usuario;
@@ -17,6 +18,8 @@ public interface Iusuario extends CrudRepository<usuario, String> {
     List<usuario> filtroUsuario(String filtro);
 
     Optional<usuario> findByNis(int nis);
-    
+
+    @Query("SELECT COUNT(u) FROM usuario u WHERE u.ficha.id_ficha = :idFicha")
+    int contarUsuariosPorFicha(@Param("idFicha") String idFicha);
 
 }

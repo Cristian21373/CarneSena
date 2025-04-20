@@ -10,8 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let tokenData = parseJwt(token);
-    if (!tokenData || tokenData.role !== "ADMIN") {
-        localStorage.removeItem("token"); // Borrar token inválido
+    
+    if (!tokenData || (tokenData.role !== "ADMIN" && tokenData.role !== "SUPERADMIN")) {
+        localStorage.removeItem("token");
         window.location.href = "/Front-End/html/login/login.html";
     }
 });
@@ -28,6 +29,13 @@ function parseJwt(token) {
     } catch (e) {
         return null;
     }
+}
+
+let token = localStorage.getItem("token");
+let rolUsuario = parseJwt(token)?.role;
+
+if (rolUsuario !== "SUPERADMIN") {
+    $("#btnNuevoAdmin").hide();
 }
 
 

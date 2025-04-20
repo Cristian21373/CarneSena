@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyecto.carnesena.interfaceService.IUsuarioService;
 import com.proyecto.carnesena.interfaces.Ificha;
-import com.proyecto.carnesena.interfaces.Iusuario;
 import com.proyecto.carnesena.model.ficha;
 
 @RestController
@@ -29,7 +29,7 @@ public class fichaController {
     private Ificha fichaService;
 
     @Autowired
-private Iusuario usuarioService;
+    private IUsuarioService usuarioService;
 
     // @PostMapping("/")
     // public ResponseEntity<Object> save(@RequestBody ficha ficha) {
@@ -137,11 +137,20 @@ private Iusuario usuarioService;
         var ficha = fichaService.findById(id);
         return new ResponseEntity<>(ficha, HttpStatus.OK);
     }
-
+    
     @DeleteMapping("/{id_ficha}")
     public ResponseEntity<Object> delete(@PathVariable("id_ficha") String id_ficha) {
+        int cantidadUsuarios = usuarioService.contarUsuariosPorFicha(id_ficha);
+
+        if (cantidadUsuarios > 0) {
+            return new ResponseEntity<>(
+                    "No se puede eliminar la ficha. Existen " + cantidadUsuarios
+                            + " usuario(s) asociados. Por favor elimínelos primero.",
+                    HttpStatus.BAD_REQUEST);
+        }
+
         fichaService.deleteById(id_ficha);
-        return new ResponseEntity<>("Registro Eliminado", HttpStatus.OK);
+        return new ResponseEntity<>("Ficha eliminada correctamente", HttpStatus.OK);
     }
 
     @PutMapping("/{id_ficha}")

@@ -1,7 +1,9 @@
 package com.proyecto.carnesena.service;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,16 +49,11 @@ public class authService implements IAdminServices {
         return dataAdmin.findByUsername(username);
     }
 
-    @Override
-    public boolean delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
 
     @Override
     public List<admin> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        List<admin> ListAdmin = (List<admin>) dataAdmin.findAll();
+        return ListAdmin;
     }
 
     public authResponse login(loginRequest request) {
@@ -71,4 +68,29 @@ public class authService implements IAdminServices {
                 .token(token)
                 .build();
     }
+
+    public String generarNuevaContrasena() {
+        int longitud = 12;
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new SecureRandom();
+        StringBuilder sb = new StringBuilder();
+    
+        for (int i = 0; i < longitud; i++) {
+            sb.append(caracteres.charAt(random.nextInt(caracteres.length())));
+        }
+        return sb.toString();
+    }
+    
+
+    public void save(admin admin) {
+        dataAdmin.save(admin);
+    }
+
+
+    @Override
+    public int deleteById(String id) {
+        dataAdmin.deleteById(id);
+        return 1;
+    }
+
 }

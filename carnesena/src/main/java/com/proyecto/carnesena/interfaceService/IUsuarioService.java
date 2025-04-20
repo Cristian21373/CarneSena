@@ -18,4 +18,6 @@ public interface IUsuarioService {
 
     public Optional<usuario> findByNis(int nis);
 
+    int contarUsuariosPorFicha(String idFicha);
+
 }

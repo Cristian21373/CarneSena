@@ -9,13 +9,16 @@ body {
     font-family: "Work Sans", serif;
     background: #F1F1F1;
     margin: 0;
-    padding: 0;
+}
+
+.center-page {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    padding-top: 100px; /* Espacio por si aparece la alerta */
+    padding-bottom: 100px;
 }
-
 
 .navbar {
     position: fixed;

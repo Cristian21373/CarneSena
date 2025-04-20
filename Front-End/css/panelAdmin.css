@@ -135,11 +135,25 @@ body {
     transform: scale(1.05);
 }
 
+.sidebar .menu-list .cerrar a:hover {
+    background-color: #d17070;
+    color: white;
+    border-radius: 5px;
+    transform: scale(1.05);
+}
+
 
 .sidebar .menu-list li:last-child {
     margin-top: auto;
     position: absolute;
     bottom: 64px;
+    width: 100%;
+}
+
+.sidebar .menu-list .Cambiar{
+    margin-top: auto;
+    position: absolute;
+    bottom: 146px;
     width: 100%;
 }
 

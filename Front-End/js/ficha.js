@@ -22,7 +22,7 @@ function listaFicha() {
                 var celdaEstado = document.createElement("td");
                 var celdaOpciones = document.createElement("td");
 
-            
+
                 celdaNumero_ficha.innerText = ficha.codigo_ficha;
                 celdaNombre_programa.innerText = ficha.nombre_programa;
                 celdaFecha_inicio.innerText = ficha.fecha_inicio;
@@ -89,7 +89,6 @@ $(document).ready(function () {
 });
 
 
-//Eliminar ficha
 function eliminarFicha(id_ficha) {
     $.ajax({
         url: urlEliminarFicha + id_ficha,
@@ -97,13 +96,33 @@ function eliminarFicha(id_ficha) {
         success: function (result) {
             Swal.fire(
                 '¡Eliminado!',
-                'La ficha ha sido eliminado.',
+                'La ficha ha sido eliminada.',
                 'success'
             );
             listaFicha();
+        },
+        error: function (xhr) {
+            let mensajeError = xhr.responseText || (xhr.responseJSON && xhr.responseJSON.message) || "Error desconocido";
+
+            if (xhr.status === 400 && mensajeError.includes("usuario(s) asociados")) {
+                Swal.fire(
+                    'Error',
+                    mensajeError,
+                    'error'
+                );
+            } else {
+                Swal.fire(
+                    'Error',
+                    'Ocurrió un error inesperado al eliminar la ficha.',
+                    'error'
+                );
+            }
         }
     });
 }
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const modalAgregarFicha = document.getElementById('modalAgregarFicha');
@@ -119,56 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-// function registrarFicha() {
-//     let codigo_ficha = document.getElementById("numeroInput").value;
-//     let nombre_programa = document.getElementById("nombreInput").value;
-//     let fecha_inicio = document.getElementById("fechaInicioInput").value;
-//     let fecha_fin = document.getElementById("fechaFinInput").value;
-
-//     if (codigo_ficha === "" || nombre_programa === "" || fecha_fin === "" || fecha_inicio === "") {
-//         Swal.fire({
-//             title: "Error",
-//             text: "Por favor, rellene todos los campos.",
-//             icon: "error"
-//         });
-//         return;
-//     }
-
-//     let formData = {
-//         "codigo_ficha": codigo_ficha,
-//         "nombre_programa": nombre_programa,
-//         "fecha_inicio": fecha_inicio,
-//         "fecha_fin": fecha_fin,
-//         "estado_ficha": "habilitado"
-//     };
-
-//     $.ajax({
-//         url: urlFicha,
-//         type: "POST",
-//         contentType: "application/json",
-//         data: JSON.stringify(formData),
-//         success: function (result) {
-//             Swal.fire({
-//                 title: "¡Excelente!",
-//                 text: "Se guardó correctamente",
-//                 icon: "success"
-//             }).then(() => {
-//                 limpiarFormulario();
-//                 listaFicha();
-//                 document.getElementById("modalAgregarFicha").style.display = "none";
-//             });
-//         },
-//         error: function (xhr) {
-//             let mensaje = xhr.responseText || "Error al guardar la ficha";
-//             Swal.fire({
-//                 title: "Error",
-//                 text: mensaje,
-//                 icon: "error"
-//             });
-//         }
-//     });
-// }
 
 function registrarFicha() {
     let codigo_ficha = document.getElementById("numeroInput").value;

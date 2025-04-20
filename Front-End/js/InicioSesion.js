@@ -24,7 +24,7 @@ $(document).ready(function () {
                 let tokenData = parseJwt(response.token);
                 console.log("Contenido del token:", tokenData); // DEBUG: Verificar qué contiene el token
                 
-                if (tokenData.role === "ADMIN") {
+                if (tokenData.role === "ADMIN" || tokenData.role === "SUPERADMIN") {
                     window.location.href = "/Front-End/html/roles/administrador/panelCarnet.html";
                 } else {
                     Swal.fire("Acceso denegado", "No tienes permisos de administrador", "error");

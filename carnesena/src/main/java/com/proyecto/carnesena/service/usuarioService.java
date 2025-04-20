@@ -51,4 +51,9 @@ public class usuarioService implements IUsuarioService {
         return data.findByNis(nis);
     }
 
+    @Override
+    public int contarUsuariosPorFicha(String idFicha) {
+        return data.contarUsuariosPorFicha(idFicha);
+    }
+
 }

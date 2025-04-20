@@ -12,7 +12,7 @@ public interface IAdminServices {
 
     public Optional<admin> findByUsername(String username);
 
-    public boolean delete(String id);
+    public int deleteById(String id);
 
     public List<admin> findAll();
 }
