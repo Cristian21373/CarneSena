@@ -22,9 +22,9 @@ public class CarnetPDFController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> generarCarnet(@PathVariable String id) {
-        usuario usuario = usuarioService.findOne(id)
+    @GetMapping("/nis/{nis}")
+    public ResponseEntity<byte[]> generarCarnetPorNis(@PathVariable int nis) {
+        usuario usuario = usuarioService.findByNis(nis)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         try {

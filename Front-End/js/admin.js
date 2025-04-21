@@ -13,7 +13,6 @@ function listaAdmin() {
                     return; // Saltar este usuario y pasar al siguiente
                 }
             
-                // Tu código normal para mostrar los admins:
                 var trRegistro = document.createElement("tr");
             
                 var celdaNombres = document.createElement("td");

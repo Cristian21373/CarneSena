@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Verificar NIS</title>
 </head>
+<style>
+
+</style>
 
 <body>
     <nav class="navbar">
@@ -53,31 +56,76 @@
             <img src="/Front-End/img/imagen-referencia.png" alt="Carné SENA">
         </div>
 
+        <!-- Verificar NIS -->
         <div class="verification-container">
             <h2>Verifica tu NIS</h2>
             <p>Ingresa tu Número de Identificación de Servicio (NIS) para validar tu registro en el sistema.</p>
             <div class="input-container">
-                <input type="text" id="nis" name="nis" required placeholder="Ingrese su NIS">
-                <button class="verify-btn">Verificar</button>
+                <input type="number" id="nis" required>
+                <button class="verify-btn" type="verify-btn" onclick="verificarNIS()">Verificar</button>
             </div>
         </div>
+
+        <form id="userForm">
+            <div id="formularioCampos" style="display: none;">
+                <h2>Registro de Usuario</h2>
+                <label>Foto:</label>
+                <img id="preview" src="#" alt="Foto del usuario"
+                    style="display:none; margin-top:10px; max-height:130px;">
+                <input type="file" id="foto" accept="image/*" required>
+
+                <label>Nombre:</label>
+                <input type="text" id="nombre" required>
+
+                <label>Apellidos:</label>
+                <input type="text" id="apellidos" required>
+
+                <label>Tipo de Documento:</label>
+                <select id="tipo_documento" required>
+                    <option value="CC">Cedula de ciudadania</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                    <option value="CE">Cedula de extranjería</option>
+                    <option value="PPT">Permiso por Protección Temporal</option>
+                </select>
+
+                <label>Número de Documento:</label>
+                <input type="number" id="numero_documento" required>
+
+
+                <label>Tipo de Sangre:</label>
+                <select id="tipo_sangre" required>
+                    <option value="">Seleccione...</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+
+                <label>Seleccione la ficha por favor:</label>
+                <select id="ficha"></select>
+
+                <button type="button" onclick="registrarUsuario()">Registrar</button>
+            </div>
+        </form>
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        <button id="btnDescargarCarnet" style="display: none;" onclick="descargarCarnet()">Descargar Carné</button>
     </div>
 </body>
+<script src=" https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/Front-End/js/jsUrl/Urls.js"></script>
+<script src="/Front-End/js/verificarNis.js"></script>
 <script src="/Front-End/js/menuMovil.js"></script>
 <script src="/Front-End/js/navegacion.js"></script>
 <script>
-    window.onload = function () {
-        if (!localStorage.getItem('alertShown')) {
-            Swal.fire({
-                title: '¡Bienvenido!',
-                text: 'Si el NIS que ingrese no está registrado en esta plataforma, no podrá descargar su carné. Esto no significa que no esté registrado en Sofía Plus. Un administrador deberá registrar su NIS en esta plataforma para que pueda proceder con la descarga.',
-                icon: 'info',
-                confirmButtonText: 'Entendido'
-            });
+   
 
-            localStorage.setItem('alertShown', 'true');
-        }
-    }
 </script>
 
 </html>

@@ -1012,3 +1012,21 @@ body {
 .btn-icon i {
     pointer-events: none;
 }
+#inputFicha {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  #inputFicha:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);
+    border-color: #28a745;
+  }
+
+  .Seleccionar-ficha{
+    display: grid;
+    margin-bottom: 10px;
+  }

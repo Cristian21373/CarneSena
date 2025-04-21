@@ -1,15 +1,22 @@
-/*Menu*/
+@font-face {
+    font-family: font-original;
+    src: url(/Front-End/css/font/Work_Sans/static/WorkSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: opciones-menu;
+    src: url(/Front-End/css/font/Work_Sans/static/WorkSans-Medium.ttf);
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    font-family: font-original;
 }
 
 
 body {
-    font-family: "Work Sans", serif;
     background: #F1F1F1;
     padding-top: 70px;
 }
@@ -42,6 +49,7 @@ body {
 }
 
 .nav-links li a {
+    font-family: opciones-menu;
     position: relative;
     color: #000000;
     text-decoration: none;
@@ -254,10 +262,12 @@ body {
     .welcome-text h1 {
         font-size: clamp(30px, 6vw, 60px);
     }
-    .welcome-buttons .btn-gray{
+
+    .welcome-buttons .btn-gray {
         padding: 10px;
         font-size: 17px;
     }
+
     .welcome-text p {
         font-size: 20px;
         color: #555;
@@ -314,13 +324,14 @@ body {
 
 @media (max-width: 1366px) and (min-width: 1122px) {
     .welcome-container {
-        max-width: 66%; /* Se mantiene bien en portátiles */
+        max-width: 66%;
+        /* Se mantiene bien en portátiles */
         padding: 60px;
         min-height: 603px;
     }
 
     .welcome-text h1 {
-        font-size: clamp(38px, 9vw, 90px); 
+        font-size: clamp(38px, 9vw, 90px);
     }
 
     .welcome-text p {
@@ -367,7 +378,6 @@ body {
 
 .welcome-buttons button {
     padding: 18px 58px;
-    font-family: "Work Sans", serif;
     font-size: 20px;
     border: none;
     border-radius: 8px;

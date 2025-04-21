@@ -1,8 +1,4 @@
 function listaFicha() {
-    var capturarFiltro = document.querySelector(".search-input").value;
-    if (capturarFiltro !== "") {
-        urlFicha += "busquedafiltro/" + capturarFiltro;
-    }
 
     $.ajax({
         url: urlFicha,

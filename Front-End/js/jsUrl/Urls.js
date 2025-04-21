@@ -1,19 +1,25 @@
 // var Servidor = "http://127.0.0.1:5500/api/v1/"
-var Servidor = "http://localhost:8080/api/v1/"
+var Servidor = "http://localhost:8080/api/"
 
-var urlLogin = Servidor + "public/admin/login/";
-var urlUsuario = Servidor + "usuario/";
-var urlEliminarUser = Servidor + "usuario/";
-var urlNuevo_usuario = Servidor + "usuario/" + "registrar-nis";
-var urlCargaExcel = Servidor + "usuario" + "/carga-masiva-nis";
-var urlEditar_usuario = Servidor +"usuario/" + "editar/"; 
-
-
-var urlAdmin = Servidor + "admin/listado/";
-var urlEliminarAdmin = Servidor + "admin/eliminar/";
-var urlNuevo_admin = Servidor + "public/admin/register/"
-var urlOlvidoContra = Servidor + "admin/olvide-password/";
+var urlLogin = Servidor + "v1/public/admin/login/";
+var urlUsuario = Servidor + "v1/usuario/";
+var urlEliminarUser = Servidor + "v1/usuario/";
+var urlNuevo_usuario = Servidor + "v1/usuario/" + "registrar-nis";
+var urlCargaExcel = Servidor + "v1/usuario" + "/carga-masiva-nis";
+var urlEditar_usuario = Servidor +"v1/usuario/" + "editar/"; 
 
 
-var urlFicha = Servidor + "ficha/"
-var urlEliminarFicha = Servidor + "ficha/"
+var urlVerificar = Servidor + "v1/usuario/verificar-nis/";
+var urlFoto = Servidor + "v1/usuario/upload"
+var urlActualizar = Servidor + "v1/usuario/actualizar-datos/"
+var urlCarnet = Servidor + "carnet/nis/" 
+
+
+var urlAdmin = Servidor + "v1/admin/listado/";
+var urlEliminarAdmin = Servidor + "v1/admin/eliminar/";
+var urlNuevo_admin = Servidor + "v1/public/admin/register/"
+var urlOlvidoContra = Servidor + "v1/admin/olvide-password/";
+
+
+var urlFicha = Servidor + "v1/ficha/"
+var urlEliminarFicha = Servidor + "v1/ficha/"

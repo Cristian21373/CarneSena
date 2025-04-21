@@ -31,7 +31,6 @@
             <li><a href="/Front-End/html/roles/administrador/panelFicha.html"><i class="fa-solid fa-circle-plus"></i>
                     Crear ficha</a></li>
             <li id="btnNuevoAdmin"><a href="/Front-End/html/roles/administrador/nuevoAdmin.html"><i class="fa-solid fa-user-tie"></i> Nuevo administrador</a></li>
-            <li class="Cambiar"><a href="#"><i class="fa-solid fa-key"></i> Cambiar contraseña</a></li>
             <li class="cerrar"><a href="#" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
             </li>
 
@@ -208,20 +207,22 @@
                                 <input type="text" class="form-control" id="inputNumeroDocumento">
                             </div>
 
-                            <div class="form-group mr-3">
+                            <div class="Seleccionar-ficha">
                                 <label for="inputFicha">Ficha</label>
                                 <select id="inputFicha" class="form-select"></select>
                             </div>
 
+                            <label >Estado</label>
                             <select class="form-control" id="inputEstado">
                                 <option value="completo">Completo</option>
                                 <option value="actualizacion">Actualizacion</option>
+                                <option value="descargado">Descargado</option>
                                 <option value="creado" style="display: none;">Creado</option>
                             </select>
 
                         </div>
 
-                        <div class="modal-footer mt-4">
+                        <div class="modal-footer mt-4" style="margin-top: 18px;">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-success">Guardar Cambios</button>
                         </div>

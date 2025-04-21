@@ -116,16 +116,25 @@ public class usuarioController {
 
     @GetMapping("/verificar-nis/{nis}")
     public ResponseEntity<?> verificarNIS(@PathVariable int nis) {
-        Optional<usuario> usuario = usuarioService.findByNis(nis);
+        Optional<usuario> usuarioOptional = usuarioService.findByNis(nis);
 
-        if (!usuario.isPresent()) {
-            return new ResponseEntity<>("NIS no encontrado", HttpStatus.NOT_FOUND);
+        if (!usuarioOptional.isPresent()) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("registrado", false);
+            response.put("mensaje", "NIS no encontrado");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
-        usuario.get().setVerificado(true);
-        usuarioService.save(usuario.get());
+        usuario usuario = usuarioOptional.get();
+        usuario.setVerificado(true);
+        usuarioService.save(usuario);
 
-        return new ResponseEntity<>(usuario.get(), HttpStatus.OK);
+        Map<String, Object> response = new HashMap<>();
+        response.put("registrado", true);
+        response.put("estado", usuario.getEstado_user());
+        response.put("mensaje", "NIS encontrado");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -175,7 +184,6 @@ public class usuarioController {
         }
 
         // Si está verificado y aún no completado, permite actualizar
-        usuario.setNis(usuarioUpdate.getNis());
         usuario.setFoto(usuarioUpdate.getFoto());
         usuario.setNombre(usuarioUpdate.getNombre());
         usuario.setApellidos(usuarioUpdate.getApellidos());
@@ -188,47 +196,6 @@ public class usuarioController {
         usuarioService.save(usuario);
         return new ResponseEntity<>("Datos de usuario registrados correctamente", HttpStatus.OK);
     }
-
-    // @PutMapping("/editar/{id_usuario}")
-    // public ResponseEntity<Object> editarUsuario(@PathVariable("id_usuario")
-    // String id,
-    // @RequestBody usuario usuarioUpdate,
-    // @RequestParam(value = "ADMIN", required = false, defaultValue = "false")
-    // boolean ADMIN) {
-
-    // Optional<usuario> usuarioExistente = usuarioService.findById(id);
-
-    // if (!usuarioExistente.isPresent()) {
-    // return new ResponseEntity<>("El usuario con ese ID no existe",
-    // HttpStatus.NOT_FOUND);
-    // }
-
-    // usuario usuario = usuarioExistente.get();
-
-    // if (!ADMIN && usuario.getEstado_user() == estado_user.completo) {
-    // return new ResponseEntity<>("No se puede editar un usuario en estado
-    // COMPLETO", HttpStatus.FORBIDDEN);
-    // }
-
-    // usuario.setFoto(usuarioUpdate.getFoto());
-    // usuario.setNombre(usuarioUpdate.getNombre());
-    // usuario.setApellidos(usuarioUpdate.getApellidos());
-    // usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
-    // usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
-    // usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
-    // usuario.setEstado_user(usuarioUpdate.getEstado_user());
-
-    // if (usuarioUpdate.getFicha() != null &&
-    // usuarioUpdate.getFicha().getId_ficha() != null) {
-    // Optional<ficha> fichaNueva =
-    // fichaService.findById(usuarioUpdate.getFicha().getId_ficha());
-    // fichaNueva.ifPresent(usuario::setFicha);
-    // }
-
-    // usuarioService.save(usuario);
-    // return new ResponseEntity<>("Datos de usuario actualizados correctamente",
-    // HttpStatus.OK);
-    // }
 
     @PutMapping(value = "/editar/{id_usuario}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> editarUsuario(
@@ -320,6 +287,10 @@ public class usuarioController {
                     usuario nuevoUsuario = new usuario();
                     nuevoUsuario.setNis(nis);
                     nuevoUsuario.setEstado_user(estado_user.creado);
+
+                    nuevoUsuario.setNumero_documento(0);
+                    nuevoUsuario.setTipo_documento(tipo_documento.CC);
+
                     usuarioService.save(nuevoUsuario);
                     nisRegistrados.add(nis);
                 }

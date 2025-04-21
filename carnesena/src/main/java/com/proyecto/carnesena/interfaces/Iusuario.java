@@ -22,4 +22,6 @@ public interface Iusuario extends CrudRepository<usuario, String> {
     @Query("SELECT COUNT(u) FROM usuario u WHERE u.ficha.id_ficha = :idFicha")
     int contarUsuariosPorFicha(@Param("idFicha") String idFicha);
 
+    
+
 }
