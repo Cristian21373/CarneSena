@@ -72,6 +72,7 @@
                     <th>Nombres</th>
                     <th>Apellidos</th>
                     <th>Correo electronico</th>
+                    <th>rol</th>
                     <th id="headerAcciones">Opciones</th>
                 </tr>
             </thead>
@@ -89,16 +90,24 @@
             <h2 class="modal-title">Registrar nuevo administrador</h2>
             <form id="formRegistrarAdmin">
                 <label for="first_name">Nombres:</label>
-                <input type="text" id="first_name" name="first_name" required>
+                <input type="text" id="first_name" name="first_name" onkeypress="soloLetras(event)" required>
+
 
                 <label for="last_name">Apellidos:</label>
-                <input type="text" id="last_name" name="last_name" required>
+                <input type="text" id="last_name" name="last_name" onkeypress="soloLetras(event)" required>
 
                 <label for="username">Correo electrónico:</label>
-                <input type="email" id="username" name="username" required>
+                <input type="email" id="username" name="username" onkeypress="alfaNumericosSignos(event)" required>
 
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
+
+                <label for="rol">Rol:</label>
+                <select class="Seleccionar" id="rol">
+                    <option value="ADMIN">Administrador</option>
+                    <option value="SUPERADMIN">Superadministrador</option>
+                </select>
+
 
                 <button type="submit" class="new-nis">Registrar</button>
             </form>

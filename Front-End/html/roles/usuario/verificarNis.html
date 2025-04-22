@@ -61,7 +61,7 @@
             <h2>Verifica tu NIS</h2>
             <p>Ingresa tu Número de Identificación de Servicio (NIS) para validar tu registro en el sistema.</p>
             <div class="input-container">
-                <input type="number" id="nis" required>
+                <input type="number" id="nis" onkeypress="soloNumeros(event)" required>
                 <button class="verify-btn" type="verify-btn" onclick="verificarNIS()">Verificar</button>
             </div>
         </div>
@@ -75,10 +75,10 @@
                 <input type="file" id="foto" accept="image/*" required>
 
                 <label>Nombre:</label>
-                <input type="text" id="nombre" required>
+                <input type="text" id="nombre" onkeypress="soloLetras(event)" required>
 
                 <label>Apellidos:</label>
-                <input type="text" id="apellidos" required>
+                <input type="text" id="apellidos" onkeypress="soloLetras(event)" required>
 
                 <label>Tipo de Documento:</label>
                 <select id="tipo_documento" required>
@@ -89,7 +89,7 @@
                 </select>
 
                 <label>Número de Documento:</label>
-                <input type="number" id="numero_documento" required>
+                <input type="number" id="numero_documento" onkeypress="soloNumeros(event)" required>
 
 
                 <label>Tipo de Sangre:</label>
@@ -123,6 +123,7 @@
 <script src="/Front-End/js/verificarNis.js"></script>
 <script src="/Front-End/js/menuMovil.js"></script>
 <script src="/Front-End/js/navegacion.js"></script>
+<script src="/Front-End/js/caracteresPermitidos/caracteres.js"></script>
 <script>
    
 

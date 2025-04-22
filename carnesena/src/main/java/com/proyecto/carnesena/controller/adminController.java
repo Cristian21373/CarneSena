@@ -39,7 +39,6 @@ public class adminController {
     @Autowired
     private EmailService emailService;
 
-
     private final authService authService;
 
     @GetMapping("profile/")
@@ -74,8 +73,38 @@ public class adminController {
         admin.setPassword(passwordEncoder.encode(nuevaContrasena));
         authService.save(admin);
 
-        String cuerpo = "Hola " + admin.getFirst_name() + ", tu nueva contraseña es: " + nuevaContrasena;
-        emailService.enviarCorreo(admin.getUsername(), "Recuperación de contraseña", cuerpo);
+        // Generar el cuerpo del correo HTML
+        String cuerpoCorreo = "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><style>"
+                +
+                "body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }"
+                +
+                ".container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden; }"
+                +
+                ".header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; }"
+                +
+                ".content { padding: 20px; }" +
+                ".content h2 { color: #333; font-size: 20px; margin-bottom: 10px; }" +
+                ".content p { color: #555; font-size: 16px; line-height: 1.6; }" +
+                ".content .important { color: #4CAF50; font-weight: bold; }" +
+                ".footer { background-color: #f4f4f4; text-align: center; padding: 10px; font-size: 14px; color: #777; border-top: 1px solid #ddd; }"
+                +
+                "@media (max-width: 600px) { .container { width: 100%; padding: 10px; } .header { font-size: 20px; } .content h2 { font-size: 18px; } }"
+                +
+                "</style></head><body>" +
+                "<div class=\"container\">" +
+                "<div class=\"header\">Recuperación de Contraseña</div>" +
+                "<div class=\"content\">" +
+                "<h2>Hola " + admin.getFirst_name() + ":</h2>" +
+                "<p>Recibimos una solicitud para recuperar tu contraseña. Aquí está tu nueva contraseña:</p>" +
+                "<p class=\"important\">" + nuevaContrasena + "</p>" +
+                "<p>Si no solicitaste un cambio de contraseña, por favor ignora este mensaje o contacta con el soporte.</p>"
+                +
+                "</div>" +
+                "<div class=\"footer\"><p>Este es un correo automático, por favor no respondas.</p></div>" +
+                "</div>" +
+                "</body></html>";
+
+        emailService.enviarCorreo(admin.getUsername(), "Recuperación de contraseña", cuerpoCorreo);
 
         return ResponseEntity.ok("Se ha enviado una nueva contraseña al correo");
     }

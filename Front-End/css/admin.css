@@ -46,6 +46,19 @@ input:focus {
 }
 
 #modalRegistrarAdmin {
-    display: none; /* Esto evita que se muestre automáticamente */
+    display: none; 
 
+}
+
+#rol{
+    height: 35px;
+    margin-bottom: 17px;
+    padding: 8px 12px;
+    width: auto;
+    border-radius: 10px;
+    border: 2px solid #81c784;
+    outline: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
 }

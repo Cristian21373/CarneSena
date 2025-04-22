@@ -9,7 +9,7 @@ function listaAdmin() {
 
             result.forEach(function (admin) {
                 // No mostrar al superadmin
-                if (admin.role === "SUPERADMIN") {
+                if (admin.username === "cristian.bahamon@soy.sena.edu.co") {
                     return; // Saltar este usuario y pasar al siguiente
                 }
             
@@ -18,11 +18,14 @@ function listaAdmin() {
                 var celdaNombres = document.createElement("td");
                 var celdaApellidos = document.createElement("td");
                 var celdaCorreo_electronico = document.createElement("td");
+                var celdaRol = document.createElement("td");
                 var celdaOpciones = document.createElement("td");
             
                 celdaNombres.innerText = admin.first_name;
                 celdaApellidos.innerText = admin.last_name;
                 celdaCorreo_electronico.innerText = admin.username;
+                celdaRol.innerText = admin.role;
+
             
                 var botonEliminar = document.createElement("button");
                 botonEliminar.className = "btn-icon eliminar-btn";
@@ -52,6 +55,7 @@ function listaAdmin() {
                 trRegistro.appendChild(celdaNombres);
                 trRegistro.appendChild(celdaApellidos);
                 trRegistro.appendChild(celdaCorreo_electronico);
+                trRegistro.appendChild(celdaRol)
                 trRegistro.appendChild(celdaOpciones);
             
                 cuerpoTabla.appendChild(trRegistro);
@@ -113,7 +117,8 @@ $(document).ready(function () {
             username: $('#username').val(),
             password: $('#password').val(),
             first_name: $('#first_name').val(),
-            last_name: $('#last_name').val()
+            last_name: $('#last_name').val(),
+            role: $('#rol').val()
         };
 
         $.ajax({

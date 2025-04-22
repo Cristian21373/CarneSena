@@ -34,13 +34,6 @@ public class AdminInitializer implements CommandLineRunner {
             admin.setPassword(passwordEncoder.encode("Crisdakar2137.."));
             adminRepository.save(admin);
             
-            admin nuevoAdmin = new admin();
-            nuevoAdmin.setUsername("Matriculas9527@sena.edu.co"); 
-            nuevoAdmin.setFirst_name("Nuevo");
-            nuevoAdmin.setLast_name("Administrador"); 
-            nuevoAdmin.setRole(role.SUPERADMIN); 
-            nuevoAdmin.setPassword(passwordEncoder.encode("GitaEmma.2025*")); 
-            adminRepository.save(nuevoAdmin);
         }
     }
 }

@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/Front-End/css/panelAdmin.css">
     <link rel="stylesheet" href="/Front-End/css/menuMoviles.css">
     <title>Control CarneSENA</title>
@@ -30,7 +32,10 @@
                     Carne</a></li>
             <li><a href="/Front-End/html/roles/administrador/panelFicha.html"><i class="fa-solid fa-circle-plus"></i>
                     Crear ficha</a></li>
-            <li id="btnNuevoAdmin"><a href="/Front-End/html/roles/administrador/nuevoAdmin.html"><i class="fa-solid fa-user-tie"></i> Nuevo administrador</a></li>
+            <li id="btnNuevoAdmin"><a href="/Front-End/html/roles/administrador/nuevoAdmin.html"><i
+                        class="fa-solid fa-user-tie"></i> Nuevo administrador</a></li>
+            <button type="button" class="cambiar" data-bs-toggle="modal"
+                data-bs-target="#modalCambiarPassword">Cambiar contraeña</button>
             <li class="cerrar"><a href="#" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
             </li>
 
@@ -52,7 +57,6 @@
                 <ul>
                     <li><a href="/Front-End/html/roles/administrador/panelCarnet.html">Carne</a></li>
                     <li><a href="/Front-End/html/roles/administrador/panelFicha.html">Crear ficha</a></li>
-                    <li id="btnNuevoAdmin"><a href="/Front-End/html/roles/administrador/nuevoAdmin.html">Nuevo administrador</a></li>
                     <li><a href="#" id="logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
                 </ul>
             </div>
@@ -118,7 +122,7 @@
                 <i class="fa-solid fa-arrow-left"></i> Volver
             </button>
             <h2 class="modal-title">Registrar NIS Manualmente</h2>
-            <input type="text" id="nisInput" placeholder="Ingresa el NIS" class="input-nis">
+            <input type="text" id="nisInput" placeholder="Ingresa el NIS" class="input-nis" onkeypress="soloNumeros(event)">
             <button id="registrarNisBtn" class="modal-btn manual">Registrar NIS</button>
         </div>
     </div>
@@ -212,7 +216,7 @@
                                 <select id="inputFicha" class="form-select"></select>
                             </div>
 
-                            <label >Estado</label>
+                            <label>Estado</label>
                             <select class="form-control" id="inputEstado">
                                 <option value="completo">Completo</option>
                                 <option value="actualizacion">Actualizacion</option>
@@ -234,6 +238,59 @@
         </div>
     </div>
 
+    <div class="modal fade cambiar-password-modal" id="modalCambiarPassword" tabindex="-1"
+        aria-labelledby="cambiarPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog cambiar-password-dialog">
+            <div class="modal-content cambiar-password-content">
+                <div class="modal-header cambiar-password-header">
+                    <h5 class="modal-title cambiar-password-title" id="cambiarPasswordModalLabel">
+                        <i class="bi bi-key-fill me-2"></i> Cambiar Contraseña
+                    </h5>
+                    <button type="button" class="btn-close cambiar-password-close-btn" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    <span class="modal-close-icon" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </span>
+                </div>
+                <div class="modal-body cambiar-password-body">
+                    <form id="formCambiarPassword" class="cambiar-password-form">
+                        <div class="mb-3 cambiar-password-input-group password-toggle-container">
+                            <label for="passwordActual" class="form-label cambiar-password-label">Contraseña
+                                Actual</label>
+                            <input type="password" class="form-control cambiar-password-input" id="passwordActual"
+                                required>
+                            <span class="password-toggle-icon" data-target="passwordActual">
+                                <i class="bi bi-eye-fill"></i>
+                            </span>
+                        </div>
+                        <div class="mb-3 cambiar-password-input-group password-toggle-container">
+                            <label for="nuevaPassword" class="form-label cambiar-password-label">Nueva
+                                Contraseña</label>
+                            <input type="password" class="form-control cambiar-password-input" id="nuevaPassword"
+                                required>
+                            <span class="password-toggle-icon" data-target="nuevaPassword">
+                                <i class="bi bi-eye-fill"></i>
+                            </span>
+                        </div>
+                        <div class="mb-3 cambiar-password-input-group password-toggle-container">
+                            <label for="confirmarPassword" class="form-label cambiar-password-label">Confirmar Nueva
+                                Contraseña</label>
+                            <input type="password" class="form-control cambiar-password-input" id="confirmarPassword"
+                                required>
+                            <span class="password-toggle-icon" data-target="confirmarPassword">
+                                <i class="bi bi-eye-fill"></i>
+                            </span>
+                        </div>
+                        <button type="submit" class="btn btn-primary cambiar-password-submit-btn">
+                             Cambiar Contraseña
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
 
 
 
@@ -246,5 +303,6 @@
 <script src="/Front-End/js/jsUrl/Urls.js"></script>
 <script src="/Front-End/js/usuario.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </html>

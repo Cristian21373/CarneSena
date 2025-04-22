@@ -185,11 +185,11 @@ public class usuarioController {
 
         // Si está verificado y aún no completado, permite actualizar
         usuario.setFoto(usuarioUpdate.getFoto());
-        usuario.setNombre(usuarioUpdate.getNombre());
-        usuario.setApellidos(usuarioUpdate.getApellidos());
+        usuario.setNombre(usuarioUpdate.getNombre().toUpperCase());
+        usuario.setApellidos(usuarioUpdate.getApellidos().toUpperCase());
         usuario.setTipo_documento(usuarioUpdate.getTipo_documento());
         usuario.setNumero_documento(usuarioUpdate.getNumero_documento());
-        usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre());
+        usuario.setTipo_sangre(usuarioUpdate.getTipo_sangre().toUpperCase());
         usuario.setFicha(usuarioUpdate.getFicha());
         usuario.setEstado_user(estado_user.completo);
 

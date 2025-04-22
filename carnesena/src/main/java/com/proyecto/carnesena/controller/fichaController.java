@@ -157,7 +157,7 @@ public class fichaController {
     public ResponseEntity<Object> update(@PathVariable("id_ficha") String id_ficha, @RequestBody ficha fichaUpdate) {
         var ficha = fichaService.findById(id_ficha).orElse(null);
         if (ficha != null) {
-            ficha.setNombre_programa(fichaUpdate.getNombre_programa());
+            ficha.setNombre_programa(fichaUpdate.getNombre_programa().toUpperCase());
             ficha.setCodigo_ficha(fichaUpdate.getCodigo_ficha());
             ficha.setEstado_ficha(fichaUpdate.getEstado_ficha());
             ficha.setFecha_inicio(fichaUpdate.getFecha_inicio());

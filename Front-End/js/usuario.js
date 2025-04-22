@@ -235,10 +235,10 @@ function actualizarUsuario(id_usuario) {
 
     $.ajax({
         url: urlEditar_usuario + id_usuario + "?ADMIN=true",
-        type: "PUT", 
+        type: "PUT",
         data: formData,
-        processData: false, 
-        contentType: false, 
+        processData: false,
+        contentType: false,
         success: function (response) {
             $('#modal-usuario').modal('hide');
             Swal.fire('¡Actualizado!', 'Los datos del usuario han sido actualizados.', 'success');
@@ -434,3 +434,119 @@ function cargarListaFicha() {
         console.error("Elemento con ID 'ficha' no encontrado.");
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordToggleIcons = document.querySelectorAll('.password-toggle-icon');
+
+    passwordToggleIcons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            const targetId = this.dataset.target;
+            const passwordInput = document.getElementById(targetId);
+            const eyeIcon = this.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('bi-eye-fill');
+                eyeIcon.classList.add('bi-eye-slash-fill');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('bi-eye-slash-fill');
+                eyeIcon.classList.add('bi-eye-fill');
+            }
+        });
+    });
+});
+
+
+document.getElementById("formCambiarPassword").addEventListener("submit", function (event) {
+    event.preventDefault(); // Evita el envío del formulario de forma tradicional
+
+    // Obtención de los valores del formulario
+    var passwordActual = document.getElementById("passwordActual").value;
+    var nuevaPassword = document.getElementById("nuevaPassword").value;
+    var confirmarPassword = document.getElementById("confirmarPassword").value;
+
+    // Validación de que las contraseñas coinciden
+    if (nuevaPassword !== confirmarPassword) {
+        Swal.fire("Error", "Las contraseñas no coinciden.", "error");
+        return;
+    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(nuevaPassword)) {
+        Swal.fire(
+            "Error",
+            "La nueva contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial (@$!%*?&).",
+            "error"
+        );
+        return;
+    }
+    // Mostrar alerta de confirmación
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Se cambiará tu contraseña. ¿Deseas continuar?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, cambiar contraseña',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Obtener el ID del administrador automáticamente desde el localStorage
+            var id = localStorage.getItem("id");  // Asegúrate de que este valor se guarda correctamente
+
+            // Verificar si el idAdmin existe
+            if (!id) {
+                Swal.fire("Error", "No se ha encontrado el ID del administrador.", "error");
+                return;
+            }
+
+            // Obtener el token Bearer desde localStorage
+            var token = localStorage.getItem("token");  // Cambia esto si lo tienes en sessionStorage
+
+            // Construcción del objeto JSON
+            var body = {
+                passwordActual: passwordActual,
+                nuevaPassword: nuevaPassword,
+                confirmarPassword: confirmarPassword
+            };
+
+            // Envío de la solicitud PUT usando fetch con Bearer token
+            fetch(`http://localhost:8080/api/v1/admin/cambiar-password/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`  // Aquí agregas el token Bearer
+                },
+                body: JSON.stringify(body)
+            })
+                .then(response => {
+                    console.log("Respuesta del servidor:", response); // Imprimir la respuesta en consola para verificar
+
+                    if (response.ok) {
+                        return response.text(); // Si la respuesta es exitosa (status 2xx), leer como texto
+                    } else {
+                        return response.text().then(errorMessage => {
+                            throw new Error(`${response.status}: ${errorMessage}`);
+                        });
+                    }
+                })
+                .then(message => {
+                    // Si llegamos aquí, la respuesta fue exitosa (response.ok fue true)
+                    Swal.fire("Éxito", "Contraseña actualizada correctamente", "success").then(() => {
+                        // Borrar el token del localStorage
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("id"); // También es buena práctica borrar el id
+
+                        // Redirigir a la página de inicio de sesión
+                        window.location.href = "/Front-End/html/login/login.html"; // Ajusta la ruta si es diferente
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Notificación de error con SweetAlert
+                    Swal.fire("Error", error.message, "error");
+                });
+        }
+    });
+});

@@ -16,7 +16,6 @@ import com.proyecto.carnesena.model.admin;
 import com.proyecto.carnesena.model.authResponse;
 import com.proyecto.carnesena.model.loginRequest;
 import com.proyecto.carnesena.model.registerRequest;
-import com.proyecto.carnesena.model.role;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +33,7 @@ public class authService implements IAdminServices {
         admin adminData = admin.builder()
                 .first_name(request.getFirst_name())
                 .last_name(request.getLast_name())
-                .role(role.ADMIN)
+                .role(request.getRole())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
@@ -63,9 +62,11 @@ public class authService implements IAdminServices {
                         request.getPassword()));
         admin admin = findByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.getToken(admin);
+        String id = admin.getId();  // Obtén el ID del administrador
         return authResponse
                 .builder()
                 .token(token)
+                .id(id)
                 .build();
     }
 

@@ -2,7 +2,7 @@
 $(document).ready(function () {
     $("form").on("submit", function (e) {
         e.preventDefault(); // Evita que el formulario se recargue
-        
+
         let username = $("#username").val().trim();
         let password = $("#password").val().trim();
 
@@ -12,18 +12,20 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: urlLogin, 
+            url: urlLogin,
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ username: username, password: password }),
             success: function (response) {
                 console.log("Token recibido:", response.token); // DEBUG: Verificar el token recibido
-                localStorage.setItem("token", response.token); 
+                localStorage.setItem("token", response.token);
+
+                localStorage.setItem("id", response.id);  // Guardamos el ID en localStorage
 
                 // Decodificar el token para obtener el rol
                 let tokenData = parseJwt(response.token);
                 console.log("Contenido del token:", tokenData); // DEBUG: Verificar qué contiene el token
-                
+
                 if (tokenData.role === "ADMIN" || tokenData.role === "SUPERADMIN") {
                     window.location.href = "/Front-End/html/roles/administrador/panelCarnet.html";
                 } else {
@@ -36,7 +38,7 @@ $(document).ready(function () {
                 if (xhr.status === 401) {
                     errorMessage = "Usuario o contraseña incorrectos. Inténtalo nuevamente.";
                 } else if (xhr.status === 403) {
-                    errorMessage = "No tienes permisos para acceder.";
+                    errorMessage = "Usuario o contraseña incorrectos. Inténtalo nuevamente.";
                 } else if (xhr.status === 500) {
                     errorMessage = "Error del servidor. Intenta más tarde.";
                 }

@@ -150,7 +150,7 @@ body {
     width: 100%;
 }
 
-.sidebar .menu-list .Cambiar{
+.sidebar .menu-list .Cambiar {
     margin-top: auto;
     position: absolute;
     bottom: 146px;
@@ -502,7 +502,8 @@ body {
 .modal {
     display: none;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -518,7 +519,7 @@ body {
     padding: 3rem 2.5rem;
     width: 95%;
     max-width: 600px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     text-align: center;
     position: relative;
     animation: slideUp 0.4s ease-in-out;
@@ -546,19 +547,21 @@ body {
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .option-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-    background-color: #cbf8e1; /* Verde clarito */
+    background-color: #cbf8e1;
+    /* Verde clarito */
 }
 
 .option-card i {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #10b981; /* Verde bonito */
+    color: #10b981;
+    /* Verde bonito */
 }
 
 .option-card h3 {
@@ -588,13 +591,25 @@ body {
 
 /* Animaciones */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 
@@ -656,6 +671,7 @@ body {
         transform: translateY(-30px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -715,6 +731,7 @@ body {
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -800,16 +817,16 @@ body {
     padding: 20px 30px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.3s ease-in-out;
-    max-height: 90vh; 
-    overflow-y: auto; 
+    max-height: 90vh;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
 /* Estilo del botón de cerrar */
 #modal-usuario .btn-close {
-    margin-right: 10px; 
-    background: transparent; 
-    border: none; 
+    margin-right: 10px;
+    background: transparent;
+    border: none;
     color: #333;
     font-size: 20px;
 }
@@ -881,6 +898,7 @@ body {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -889,9 +907,9 @@ body {
 
 #modal-usuario .modal-dialog {
     display: flex;
-    align-items: center; 
-    justify-content: center; 
-    min-height: 100vh; 
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -900,12 +918,12 @@ body {
     #modal-usuario .modal-content::-webkit-scrollbar {
         width: 0px;
     }
-    
+
 }
 
 #modal-usuario .modal-content {
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 
@@ -920,7 +938,8 @@ body {
 
 /* Espacio entre los campos del formulario */
 .form-group {
-    margin-bottom: 15px; /* Espacio entre los campos */
+    margin-bottom: 15px;
+    /* Espacio entre los campos */
     width: 100%;
 }
 
@@ -941,7 +960,7 @@ body {
     }
 
     .form-group {
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
 }
 
@@ -951,17 +970,19 @@ body {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
+
 /* Título del modal */
 #modal-usuario .modal-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin-left: 10px; 
+    margin-left: 10px;
     text-align: center;
 }
 
@@ -969,8 +990,8 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    cursor: pointer; 
-    margin-left: 10px; 
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 
@@ -1012,21 +1033,263 @@ body {
 .btn-icon i {
     pointer-events: none;
 }
+
 #inputFicha {
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     padding: 10px;
     border-radius: 0.75rem;
     transition: all 0.3s ease;
-  }
+}
 
-  #inputFicha:focus {
+#inputFicha:focus {
     outline: none;
     box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);
     border-color: #28a745;
-  }
+}
 
-  .Seleccionar-ficha{
+.Seleccionar-ficha {
     display: grid;
     margin-bottom: 10px;
-  }
+}
+
+
+
+/* Modal */
+.modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+    animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.modal-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-body {
+    background-color: #f8f9fa;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Botones */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-outline-secondary {
+    border-radius: 8px;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+}
+
+/* Íconos 👁️ */
+.input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group input.form-control {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 1rem;
+    }
+}
+
+
+/* Estilos específicos para el modal de cambiar contraseña */
+.cambiar-password-modal .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 3.5rem);
+    /* Ajusta el margen superior e inferior si es necesario */
+}
+
+.cambiar-password-dialog {
+    max-width: 400px;
+    /* Ancho máximo del diálogo */
+    margin: 1.75rem auto;
+    /* Centrado horizontal y margen vertical automático */
+}
+
+.cambiar-password-content {
+    border-radius: 15px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.cambiar-password-header {
+    background-color: #92da93;
+    /* Azul llamativo */
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cambiar-password-title {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.cambiar-password-close-btn {
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.cambiar-password-close-btn:hover {
+    opacity: 1;
+}
+
+.cambiar-password-body {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    /* Gris claro de fondo */
+}
+
+.cambiar-password-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.cambiar-password-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.cambiar-password-label {
+    font-weight: bold;
+    color: #343a40;
+    /* Gris oscuro para el texto */
+    margin-bottom: 0.5rem;
+}
+
+.cambiar-password-input {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.cambiar-password-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.cambiar-password-submit-btn {
+    background-color: #28a745;
+    /* Verde llamativo para el botón */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.cambiar-password-submit-btn:hover {
+    background-color: #1e7e34;
+}
+
+.password-toggle-container {
+    position: relative;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-6%);
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.password-toggle-icon:hover {
+    color: #007bff;
+}
+
+
+.sidebar .menu-list .cambiar {
+    margin-top: auto;
+    position: absolute;
+    bottom: 146px;
+    width: 81%;
+    margin-left: 24px;
+}
+
+.cambiar {
+    background-color: transparent;
+    color: #000;
+    font-weight: 500;
+    border: none;
+    font-size: 18px;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, transform 0.15s ease-in-out;
+    font-family: "Work Sans", serif;
+}
+
+.cambiar:hover {
+    background-color: #65c472;
+    color: white;
+    transform: scale(1.05);
+
+}
+
+.cambiar:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(101, 196, 114, 0.5);
+}
