@@ -16,7 +16,7 @@ public class corsConfig {
 		CorsConfiguration config = new CorsConfiguration();
 
 		config.addAllowedOrigin("http://carnesena.online");
-		config.addAllowedOrigin("http://carnesena.online:8080"); // por si usas el puerto
+		config.addAllowedOrigin("http://82.25.92.211.online:80"); // por si usas el puerto
 
 		config.addAllowedMethod("GET");
 		config.addAllowedMethod("POST");
