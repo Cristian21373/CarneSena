@@ -20,11 +20,8 @@ function listaUsuario() {
                 var celdaFoto = document.createElement("td");
                 var img = document.createElement("img");
                 if (usuario.foto) {
-                    if (!usuario.foto.startsWith("http")) {
-                        img.src = "http://82.25.92.211:8080/uploads/" + usuario.foto;
-                    } else {
-                        img.src = usuario.foto;
-                    }
+                    let rutaFoto = usuario.foto.startsWith("http") ? usuario.foto : urlTraerFoto + usuario.foto;
+                    img.src = rutaFoto;
                 }
                 img.alt = "Foto";
                 img.style.width = "24px";
