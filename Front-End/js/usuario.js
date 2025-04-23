@@ -21,7 +21,7 @@ function listaUsuario() {
                 var img = document.createElement("img");
                 if (usuario.foto) {
                     if (!usuario.foto.startsWith("http")) {
-                        img.src = "http://localhost:8080/" + usuario.foto;
+                        img.src = "http://82.25.92.211:8080/" + usuario.foto;
                     } else {
                         img.src = usuario.foto;
                     }

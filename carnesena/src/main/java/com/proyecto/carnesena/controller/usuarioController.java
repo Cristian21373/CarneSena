@@ -107,7 +107,7 @@ public class usuarioController {
             Files.copy(file.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
 
             // URL de la imagen
-            String urlImagen = "http://localhost:8080/uploads/" + nombreArchivo;
+            String urlImagen = "http://82.25.92.211:8080/uploads/" + nombreArchivo;
             return ResponseEntity.ok().body("{\"url\": \"" + urlImagen + "\"}");
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Error al subir la imagen");

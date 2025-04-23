@@ -197,6 +197,9 @@ function descargarCarnet() {
         return;
     }
 
+    window.open(urlCarnet + `${nis}`, "_blank");
 
-    window.open(urlCarnet + `${nis}`);
+    setTimeout(() => {
+        window.location.href = "/Front-End/index.html"; 
+    }, 1500);
 }

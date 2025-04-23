@@ -1,7 +1,7 @@
 // var Servidor = "http://127.0.0.1:5500/api/v1/"
-var Servidor = "http://localhost:8080/api/"
+var Servidor = "http://82.25.92.211:8080/api/"
 
-var ServidorFoto = "http://localhost:8080/";
+var ServidorFoto = "http://82.25.92.211:8080/";
 
 var urlLogin = Servidor + "v1/public/admin/login/";
 var urlUsuario = Servidor + "v1/usuario/";
