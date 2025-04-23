@@ -180,7 +180,7 @@ function consultarUsuarioID(id_usuario) {
         success: function (usuario) {
             $('#inputIdUsuario').val(usuario.id_usuario);
             if (usuario.foto) {
-                let rutaFoto = usuario.foto.startsWith("http") ? usuario.foto : `http://localhost:8080/${usuario.foto}`;
+                let rutaFoto = usuario.foto.startsWith("http") ? usuario.foto : urlTraerFoto + `${usuario.foto}`;
                 $('#previewFoto').attr('src', rutaFoto).show();
             }
 
@@ -512,7 +512,7 @@ document.getElementById("formCambiarPassword").addEventListener("submit", functi
             };
 
             // Envío de la solicitud PUT usando fetch con Bearer token
-            fetch(`http://localhost:8080/api/v1/admin/cambiar-password/${id}`, {
+            fetch(urlCambiarContraseña + `${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

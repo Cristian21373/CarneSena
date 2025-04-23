@@ -1,12 +1,16 @@
 // var Servidor = "http://127.0.0.1:5500/api/v1/"
 var Servidor = "http://localhost:8080/api/"
 
+var ServidorFoto = "http://localhost:8080/";
+
 var urlLogin = Servidor + "v1/public/admin/login/";
 var urlUsuario = Servidor + "v1/usuario/";
 var urlEliminarUser = Servidor + "v1/usuario/";
 var urlNuevo_usuario = Servidor + "v1/usuario/" + "registrar-nis";
 var urlCargaExcel = Servidor + "v1/usuario" + "/carga-masiva-nis";
-var urlEditar_usuario = Servidor +"v1/usuario/" + "editar/"; 
+var urlEditar_usuario = Servidor +"v1/usuario/" + "editar/";
+var urlTraerFoto = ServidorFoto; 
+var urlCambiarContraseña = Servidor + "v1/admin/cambiar-password/";
 
 
 var urlVerificar = Servidor + "v1/usuario/verificar-nis/";
