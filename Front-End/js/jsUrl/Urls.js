@@ -14,7 +14,7 @@ var urlCambiarContraseña = Servidor + "v1/admin/cambiar-password/";
 
 
 var urlVerificar = Servidor + "v1/usuario/verificar-nis/";
-var urlFoto = "http://82.25.92.211:8080/" + "uploads/"
+var urlFoto = Servidor + "v1/usuario/upload"
 var urlActualizar = Servidor + "v1/usuario/actualizar-datos/"
 var urlCarnet = Servidor + "carnet/nis/" 
 

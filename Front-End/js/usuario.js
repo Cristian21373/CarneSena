@@ -41,7 +41,7 @@ function listaUsuario() {
                 var celdaNombre_programa = document.createElement("td");
                 var celdaEstado = document.createElement("td");
                 var celdaOpciones = document.createElement("td");
-
+                
                 celdaNIS.innerText = usuario.nis;
                 celdaNombres.innerText = usuario.nombre;
                 celdaApellidos.innerText = usuario.apellidos;

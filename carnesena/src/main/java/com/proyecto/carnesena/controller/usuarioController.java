@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 
@@ -107,7 +108,8 @@ public class usuarioController {
             Files.copy(file.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
 
             // URL de la imagen
-            String urlImagen = "http://localhost:8080/uploads/" + nombreArchivo;
+            String serverIp = InetAddress.getLocalHost().getHostAddress();
+            String urlImagen = "http://" + serverIp + ":8080/uploads/" + nombreArchivo;
             return ResponseEntity.ok().body("{\"url\": \"" + urlImagen + "\"}");
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Error al subir la imagen");
