@@ -56,8 +56,6 @@ public class usuario {
 
     private boolean verificado;
 
-    
-    
     @Enumerated(EnumType.STRING)
     @Column(nullable = true) 
     private estado_user estado_user;
