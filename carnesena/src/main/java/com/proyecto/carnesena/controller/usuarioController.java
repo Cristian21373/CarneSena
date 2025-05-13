@@ -107,7 +107,7 @@ public class usuarioController {
             Files.copy(file.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
 
             // URL de la imagen
-            String serverIp = "82.25.82.211";
+            String serverIp = "82.25.92.211";
             String urlImagen = "http://" + serverIp + ":8080/uploads/" + nombreArchivo;
             return ResponseEntity.ok().body("{\"url\": \"" + urlImagen + "\"}");
         } catch (IOException e) {

@@ -15,8 +15,7 @@ public class corsConfig {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 
-		config.addAllowedOrigin("http://82.25.92.211");
-		config.addAllowedOrigin("http://carnesena.online");
+		config.addAllowedOrigin("*");
 
 		config.addAllowedMethod("GET");
 		config.addAllowedMethod("POST");
